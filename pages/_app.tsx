@@ -27,6 +27,11 @@ const App = ({ Component, pageProps }: AppProps) => {
                     rel='manifest'
                     href='/manifest.json'
                 />
+                <link
+                    rel='icon'
+                    href='/favicon.png'
+                    sizes='any'
+                />
             </Head>
             <Provider store={store}>
                 <main className={montserrat.className}>

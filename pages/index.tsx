@@ -1,7 +1,9 @@
 import { useGetAsteroidsMutation } from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
+import isEmpty from 'lodash-es/isEmpty'
 import { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import React from 'react'
 
 import { Asteroid } from '@/components/asteroid/asteroid.module'
@@ -26,6 +28,15 @@ const Main: NextPage = () => {
     }, [localStorage])
 
     React.useEffect(() => {
+        if (
+            !isEmpty(asteroidsData) &&
+            !asteroidsData.near_earth_objects?.[currentDate]
+        ) {
+            getAsteroids(currentDate)
+        }
+    }, [asteroidsData, currentDate])
+
+    React.useEffect(() => {
         if (data) {
             setLocalStorage(JSON.stringify(data))
         }
@@ -33,15 +44,35 @@ const Main: NextPage = () => {
 
     return (
         <>
+            <NextSeo
+                title={'Мониторинг астероидов'}
+                description={
+                    'Система мониторинга астероидов использует API сервиса NASA (NeoWS) для отслеживания сближающихся с Землей объектов.'
+                }
+                openGraph={{
+                    images: [
+                        {
+                            height: 819,
+                            url: '/images/main-page.jpg',
+                            width: 1280
+                        }
+                    ],
+                    locale: 'ru'
+                }}
+            />
             <Header />
             <div className={'wrapper'}>
                 <p>
-                    Оповещение об астероидах использует API веб-службы объектов,
-                    сближающихся с Землей (NeoWS), НАСА для предоставления самой
-                    актуальной информации об астероидах, которые приблизится к
-                    Земле сегодня, т. е. 22 июля 2023 года. Нажмите «Астероид»,
-                    чтобы получить трехмерное изображение того, где находится
-                    астероид в космосе.
+                    Система мониторинга астероидов использует API сервиса NASA
+                    (NeoWS) для отслеживания сближающихся с Землей объектов.
+                    Данный сервис предоставляет актуальнные данные по всем
+                    астероидам, которые сближаются с Землей сегодня, т.е.{' '}
+                    <span className={'date'}>{currentDate}</span>. Если астероид
+                    пересекает орбиту Земли, то он считается как потенциально
+                    опасный астероид, представляющий угрозу нашей планете. В
+                    настоящий момент в базе данных астероидов насчитывается
+                    порядка <b>33 тысяч</b> объектов и каждый год эта база
+                    расширяется.
                 </p>
                 <Counter
                     total={asteroidsData?.element_count}
