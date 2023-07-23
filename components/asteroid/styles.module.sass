@@ -1,0 +1,69 @@
+.asteroid
+  margin: 0 0 2rem 0
+
+  .container
+    background-color: #0e0e0e
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    align-items: center
+    justify-items: stretch
+    max-width: 900px
+    width: 100%
+    border-radius: 5px
+    padding: 1.5rem 0 1.5rem 2rem
+    letter-spacing: 0.4px
+
+    @media only screen and (max-width: 768px)
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: center
+      padding: 0.8rem 0
+      gap: 0.5rem
+
+    .details
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      font-weight: 200
+
+      @media only screen and (max-width: 768px)
+        grid-column: span 2
+        align-items: center
+        margin-bottom: 2rem
+
+      .name
+        font-size: 2.5rem
+        font-weight: bold
+        line-height: 3rem
+        margin: 0 0 1rem
+
+      p
+        margin: 0
+        padding-bottom: 0
+
+      .dangerous, .notDangerous
+        background-color: #fb5252
+        color: #fff
+        font-weight: 400
+        border: none
+        border-radius: 0.2rem
+        padding: 0.15rem 0.4rem
+        margin: 1rem 0 0 0
+
+      .notDangerous
+        background-color: #6fff87
+        color: #000
+
+    .comparison
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: 0.8rem
+      font-weight: 300
+
+      .comparisonSizeImage
+        max-height: 150px
+        width: auto
+
+      .comparisonSpeedImage
+        max-height: 150px
+        width: auto
