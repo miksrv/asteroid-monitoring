@@ -66,7 +66,9 @@ export const Asteroid: React.FC<TAsteroidProps> = ({ data }) => {
                         src={imgBullet}
                         alt={'Скорость астероида'}
                     />
-                    <div>{asteroidSpeed > 1 && `${asteroidSpeed}X`} Bullet</div>
+                    <div>
+                        {asteroidSpeed > 1 && `${asteroidSpeed}X`} Скорости пули
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,150 +29,150 @@ export const comparisonSize = (asteroidSize: number): TComparison => {
     if (asteroidSize <= 1) {
         return {
             img: imgGuitar,
-            text: 'Guitar'
+            text: 'Гитара'
         }
     }
     if (asteroidSize <= 2) {
         return {
             img: imgDoor,
-            text: 'Door'
+            text: 'Дверь'
         }
     }
     if (asteroidSize >= 3 && asteroidSize <= 4) {
         return {
             img: imgCar,
-            text: 'Car'
+            text: 'Машина'
         }
     }
     if (asteroidSize >= 5 && asteroidSize <= 7) {
         return {
             img: imgGiraffe,
-            text: 'Giraffe'
+            text: 'Жираф'
         }
     }
     if (asteroidSize >= 8 && asteroidSize <= 9) {
         return {
             img: imgLondonBus,
-            text: 'London bus'
+            text: 'Автобус'
         }
     }
     if (asteroidSize >= 10 && asteroidSize <= 12) {
         return {
             img: imgElectricPole,
-            text: 'Electric pole'
+            text: 'Опора ЛЭП'
         }
     }
     if (asteroidSize >= 13 && asteroidSize <= 15) {
         return {
             img: img5StoreyBuilding,
-            text: '5 Storey building'
+            text: 'Пятиэтажное здание'
         }
     }
     if (asteroidSize >= 16 && asteroidSize <= 20) {
         return {
             img: imgSemiTrailerTruck,
-            text: 'Semi-trailer truck'
+            text: 'Грузовик с прицепом'
         }
     }
     if (asteroidSize >= 21 && asteroidSize <= 40) {
         return {
             img: img10StoreyBuilding,
-            text: '10 Storey building'
+            text: 'Десятиэтажное здание'
         }
     }
     if (asteroidSize >= 41 && asteroidSize <= 50) {
         return {
             img: imgAeroplane,
-            text: 'Aeroplane'
+            text: 'Самолет'
         }
     }
     if (asteroidSize >= 51 && asteroidSize <= 70) {
         return {
             img: imgPisaTower,
-            text: 'Leaning Tower of Pisa'
+            text: 'Пизанская башня'
         }
     }
     if (asteroidSize >= 71 && asteroidSize <= 80) {
         return {
             img: imgTajMahal,
-            text: 'Taj Mahal'
+            text: 'Тадж-Махал'
         }
     }
     if (asteroidSize >= 81 && asteroidSize <= 90) {
         return {
             img: imgStatueLiberty,
-            text: 'Statue of Liberty'
+            text: 'Статуя Свободы'
         }
     }
     if (asteroidSize >= 91 && asteroidSize <= 180) {
         return {
             img: imgFootballField,
-            text: 'Football field'
+            text: 'Футбольное поле'
         }
     }
     if (asteroidSize >= 181 && asteroidSize <= 200) {
         return {
             img: imgPyramids,
-            text: 'Great Pyramids of Giza'
+            text: 'Великие пирамиды Гизы'
         }
     }
     if (asteroidSize >= 201 && asteroidSize <= 400) {
         return {
             img: imgEiffelTower,
-            text: 'Eiffel Tower'
+            text: 'Эйфелева башня'
         }
     }
     if (asteroidSize >= 401 && asteroidSize <= 700) {
         return {
             img: imgEiffelTower,
-            text: '2X Eiffel Tower'
+            text: '2X Эйфелева башня'
         }
     }
     if (asteroidSize >= 701 && asteroidSize <= 900) {
         return {
             img: imgBurjKhalifa,
-            text: 'Burj Khalifa'
+            text: 'Бурдж-Халифа'
         }
     }
     if (asteroidSize >= 901 && asteroidSize <= 1000) {
         return {
             img: imgFootballField,
-            text: '10X Football field'
+            text: '10X Футбольных полей'
         }
     }
     if (asteroidSize >= 1001 && asteroidSize <= 2000) {
         return {
             img: imgBurjKhalifa,
-            text: '2X Burj Khalifa'
+            text: '2X Бурдж-Халифа'
         }
     }
     if (asteroidSize >= 2001 && asteroidSize <= 3000) {
         return {
             img: imgBurjKhalifa,
-            text: '3X Burj Khalifa'
+            text: '3X Бурдж-Халифа'
         }
     }
     if (asteroidSize >= 3001 && asteroidSize <= 4000) {
         return {
             img: imgBurjKhalifa,
-            text: '4X Burj Khalifa'
+            text: '4X Бурдж-Халифа'
         }
     }
     if (asteroidSize >= 4001 && asteroidSize <= 6000) {
         return {
             img: imgKilimanjaro,
-            text: 'Kilimanjaro'
+            text: 'Килиманджаро'
         }
     }
     if (asteroidSize >= 6001 && asteroidSize <= 9000) {
         return {
             img: imgMountEverest,
-            text: 'Mount Everest'
+            text: 'Гора Эверест'
         }
     }
 
     return {
         img: imgMountEverest,
-        text: `${Math.round(asteroidSize / 8000)} Mount Everest`
+        text: `${Math.round(asteroidSize / 8000)}X Гора Эверест`
     }
 }
