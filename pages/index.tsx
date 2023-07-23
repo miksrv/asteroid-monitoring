@@ -6,13 +6,13 @@ import React from 'react'
 
 import { Asteroid } from '@/components/asteroid/asteroid.module'
 import { Counter } from '@/components/counter/counter.module'
+import { Footer } from '@/components/footer/footer.module'
 import { Header } from '@/components/header/header.module'
 
 const Main: NextPage = () => {
     const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
     const [localStorage, setLocalStorage] = useLocalStorage('asteroids', '')
-    const [getAsteroids, { isLoading, isSuccess, isError, error, data }] =
-        useGetAsteroidsMutation()
+    const [getAsteroids, { data }] = useGetAsteroidsMutation()
 
     const asteroidsData: ApiNasaResponse = React.useMemo(
         () => (localStorage ? JSON.parse(localStorage) : {}),
@@ -64,6 +64,7 @@ const Main: NextPage = () => {
                         )
                     )}
             </div>
+            <Footer />
         </>
     )
 }
