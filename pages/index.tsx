@@ -34,13 +34,13 @@ const Main: NextPage = () => {
         ) {
             getAsteroids(currentDate)
         }
-    }, [asteroidsData, currentDate])
+    }, [asteroidsData, currentDate, getAsteroids])
 
     React.useEffect(() => {
         if (data) {
             setLocalStorage(JSON.stringify(data))
         }
-    }, [data])
+    }, [data, setLocalStorage])
 
     return (
         <>
@@ -86,14 +86,16 @@ const Main: NextPage = () => {
                     }
                 />
                 {asteroidsData &&
-                    asteroidsData.near_earth_objects?.[currentDate]?.map(
-                        (data, index) => (
+                    asteroidsData.near_earth_objects?.[currentDate]
+                        ?.sort(({ is_potentially_hazardous_asteroid }) =>
+                            is_potentially_hazardous_asteroid ? -1 : 1
+                        )
+                        .map((data, index) => (
                             <Asteroid
                                 key={index}
                                 data={data}
                             />
-                        )
-                    )}
+                        ))}
             </div>
             <Footer />
         </>

@@ -64,7 +64,12 @@
                 "ignoreStrings": true
             }
         ],
-        "no-console": "warn",
+        "no-console": [
+            "warn",
+            {
+                "allow": ["warn", "error"]
+            }
+        ],
         "no-duplicate-imports": "warn",
         "no-restricted-imports": [
             "error",
