@@ -8,11 +8,11 @@ import imgBullet from '@/public/images/rifle-bullet.png'
 
 import styles from './styles.module.sass'
 
-type TAsteroidProps = {
+type AsteroidProps = {
     data: AsteroidData
 }
 
-export const Asteroid: React.FC<TAsteroidProps> = ({ data }) => {
+export const Asteroid: React.FC<AsteroidProps> = ({ data }) => {
     const asteroidEstimatedSize = Math.round(
         (data.estimated_diameter.meters.estimated_diameter_max +
             data.estimated_diameter.meters.estimated_diameter_min) /
@@ -75,3 +75,5 @@ export const Asteroid: React.FC<TAsteroidProps> = ({ data }) => {
         </div>
     )
 }
+
+export default Asteroid

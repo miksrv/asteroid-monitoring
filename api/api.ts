@@ -2,7 +2,7 @@ import { ApiNasaResponse } from '@/api/types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-export const api = createApi({
+export const API = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_API_URL
     }),
@@ -22,10 +22,7 @@ export const api = createApi({
 })
 
 // Export hooks for usage in functional components
-export const {
-    useGetAsteroidsMutation
-    // util: { getRunningQueriesThunk }
-} = api
+export default API
 
 // export endpoints for use in SSR
 // export const { getAsteroids } = api.endpoints

@@ -18,3 +18,5 @@ export const Header: React.FC = () => (
         <div className={styles.divider} />
     </>
 )
+
+export default Header

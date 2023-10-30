@@ -2,12 +2,12 @@ import React from 'react'
 
 import styles from './styles.module.sass'
 
-type TCounterProps = {
+type CounterProps = {
     total?: number
     dangerous?: number
 }
 
-export const Counter: React.FC<TCounterProps> = ({ total, dangerous }) => (
+export const Counter: React.FC<CounterProps> = ({ total, dangerous }) => (
     <div className={styles.counter}>
         {(!!total || !!dangerous) && <div className={styles.divider} />}
         {!!total && (
@@ -24,3 +24,5 @@ export const Counter: React.FC<TCounterProps> = ({ total, dangerous }) => (
         )}
     </div>
 )
+
+export default Counter
