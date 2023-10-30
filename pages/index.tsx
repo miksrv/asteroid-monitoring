@@ -1,4 +1,4 @@
-import { useGetAsteroidsMutation } from '@/api/api'
+import API from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
 import isEmpty from 'lodash-es/isEmpty'
@@ -6,15 +6,15 @@ import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import React from 'react'
 
-import { Asteroid } from '@/components/asteroid/asteroid.module'
-import { Counter } from '@/components/counter/counter.module'
-import { Footer } from '@/components/footer/footer.module'
-import { Header } from '@/components/header/header.module'
+import Asteroid from '@/components/asteroid'
+import Counter from '@/components/counter'
+import Footer from '@/components/footer'
+import Header from '@/components/header'
 
 const MainPage: NextPage = () => {
     const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
     const [localStorage, setLocalStorage] = useLocalStorage('asteroids', '')
-    const [getAsteroids, { data }] = useGetAsteroidsMutation()
+    const [getAsteroids, { data }] = API.useGetAsteroidsMutation()
 
     const asteroidsData: ApiNasaResponse = React.useMemo(
         () => (localStorage ? JSON.parse(localStorage) : {}),

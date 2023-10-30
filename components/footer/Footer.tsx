@@ -23,3 +23,5 @@ export const Footer: React.FC = () => (
         <span>({update})</span>
     </div>
 )
+
+export default Footer
