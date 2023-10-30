@@ -29,4 +29,4 @@ export const {
 } = api
 
 // export endpoints for use in SSR
-// export const {} = api.endpoints
+export const { getAsteroids } = api.endpoints

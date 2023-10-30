@@ -42,6 +42,7 @@ export const Asteroid: React.FC<TAsteroidProps> = ({ data }) => {
                     <p>Расчетный размер - {asteroidEstimatedSize} м</p>
                     <p>Время сближения - {asteroidApproachTime} UTC</p>
                     <p>Расстояние - {asteroidMissDistance} au</p>
+                    <p>Скорость - {asteroidSpeed} км/сек</p>
                     {data.is_potentially_hazardous_asteroid ? (
                         <div className={styles.dangerous}>
                             Потенциально опасный

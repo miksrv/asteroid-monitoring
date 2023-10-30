@@ -1,4 +1,5 @@
-import { useGetAsteroidsMutation } from '@/api/api'
+import { useGetAsteroidsMutation, getAsteroids, getRunningQueriesThunk } from '@/api/api'
+import { wrapper } from '@/api/store'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
 import isEmpty from 'lodash-es/isEmpty'
@@ -11,7 +12,21 @@ import { Counter } from '@/components/counter/counter.module'
 import { Footer } from '@/components/footer/footer.module'
 import { Header } from '@/components/header/header.module'
 
-const Main: NextPage = () => {
+export const getServerSideProps = wrapper.getServerSideProps(
+    (store) => async () => {
+        const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
+
+        store.dispatch(getAsteroids.initiate(currentDate))
+
+        await Promise.all(store.dispatch(getRunningQueriesThunk()))
+
+        return {
+            props: { object: {} }
+        }
+    }
+)
+
+const MainPage: NextPage = () => {
     const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
     const [localStorage, setLocalStorage] = useLocalStorage('asteroids', '')
     const [getAsteroids, { data }] = useGetAsteroidsMutation()
@@ -102,4 +117,4 @@ const Main: NextPage = () => {
     )
 }
 
-export default Main
+export default MainPage
