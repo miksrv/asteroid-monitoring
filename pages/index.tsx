@@ -1,4 +1,8 @@
-import { useGetAsteroidsMutation, getAsteroids, getRunningQueriesThunk } from '@/api/api'
+import {
+    getAsteroids,
+    getRunningQueriesThunk,
+    useGetAsteroidsMutation
+} from '@/api/api'
 import { wrapper } from '@/api/store'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
@@ -49,13 +53,13 @@ const MainPage: NextPage = () => {
         ) {
             getAsteroids(currentDate)
         }
-    }, [asteroidsData, currentDate, getAsteroids])
+    }, [asteroidsData, currentDate])
 
     React.useEffect(() => {
         if (data) {
             setLocalStorage(JSON.stringify(data))
         }
-    }, [data, setLocalStorage])
+    }, [data])
 
     return (
         <>
