@@ -11,7 +11,7 @@ import { Counter } from '@/components/counter/counter.module'
 import { Footer } from '@/components/footer/footer.module'
 import { Header } from '@/components/header/header.module'
 
-const Main: NextPage = () => {
+const MainPage: NextPage = () => {
     const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
     const [localStorage, setLocalStorage] = useLocalStorage('asteroids', '')
     const [getAsteroids, { data }] = useGetAsteroidsMutation()
@@ -34,13 +34,13 @@ const Main: NextPage = () => {
         ) {
             getAsteroids(currentDate)
         }
-    }, [asteroidsData, currentDate, getAsteroids])
+    }, [asteroidsData, currentDate])
 
     React.useEffect(() => {
         if (data) {
             setLocalStorage(JSON.stringify(data))
         }
-    }, [data, setLocalStorage])
+    }, [data])
 
     return (
         <>
@@ -102,4 +102,4 @@ const Main: NextPage = () => {
     )
 }
 
-export default Main
+export default MainPage

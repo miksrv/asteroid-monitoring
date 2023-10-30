@@ -23,10 +23,9 @@ export const api = createApi({
 
 // Export hooks for usage in functional components
 export const {
-    useGetAsteroidsMutation,
-
-    util: { getRunningQueriesThunk }
+    useGetAsteroidsMutation
+    // util: { getRunningQueriesThunk }
 } = api
 
 // export endpoints for use in SSR
-// export const {} = api.endpoints
+// export const { getAsteroids } = api.endpoints
