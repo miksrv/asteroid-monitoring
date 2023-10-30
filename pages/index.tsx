@@ -1,6 +1,4 @@
-import {
-    useGetAsteroidsMutation
-} from '@/api/api'
+import { useGetAsteroidsMutation } from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
 import isEmpty from 'lodash-es/isEmpty'

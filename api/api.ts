@@ -23,7 +23,7 @@ export const api = createApi({
 
 // Export hooks for usage in functional components
 export const {
-    useGetAsteroidsMutation,
+    useGetAsteroidsMutation
     // util: { getRunningQueriesThunk }
 } = api
 
