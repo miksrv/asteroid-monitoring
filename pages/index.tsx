@@ -1,6 +1,7 @@
 import API from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
+import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
 import isEmpty from 'lodash-es/isEmpty'
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
@@ -14,7 +15,7 @@ import Header from '@/components/header'
 const MainPage: NextPage = () => {
     const currentDate = new Date(new Date() + 'Z').toJSON().slice(0, 10)
     const [localStorage, setLocalStorage] = useLocalStorage('asteroids', '')
-    const [getAsteroids, { data }] = API.useGetAsteroidsMutation()
+    const [getAsteroids, { data, isLoading }] = API.useGetAsteroidsMutation()
 
     const asteroidsData: ApiNasaResponse = React.useMemo(
         () => (localStorage ? JSON.parse(localStorage) : {}),
@@ -85,6 +86,13 @@ const MainPage: NextPage = () => {
                         )?.length
                     }
                 />
+                {isLoading && (
+                    <div className={'loader'}>
+                        <h2>Пожалуста, подождите</h2>
+                        <h4>Ищем приближающиеся к Земле астеродиы</h4>
+                        <AsteroidLoadingSpinner />
+                    </div>
+                )}
                 {asteroidsData &&
                     asteroidsData.near_earth_objects?.[currentDate]
                         ?.sort(({ is_potentially_hazardous_asteroid }) =>
