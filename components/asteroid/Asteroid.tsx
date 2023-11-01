@@ -40,7 +40,7 @@ export const Asteroid: React.FC<AsteroidProps> = ({ data }) => {
             <div className={styles.container}>
                 <div className={styles.details}>
                     <h3 className={styles.name}>
-                        {data.name?.match(/\(([^)]*)\)/)?.[1] || ''}
+                        {data.name?.match(/\(([^)]+)\)/)?.[1] || ''}
                     </h3>
                     <p>Расчетный размер - {asteroidEstimatedSize} м</p>
                     <p>Время сближения - {asteroidApproachTime} UTC</p>
