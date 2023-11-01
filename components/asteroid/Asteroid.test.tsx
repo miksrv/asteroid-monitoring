@@ -1,4 +1,3 @@
-import { AsteroidData } from '@/api/types'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
