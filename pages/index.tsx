@@ -2,7 +2,6 @@ import API from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
 import { useLocalStorage } from '@/functions/hooks'
 import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
-import isEmpty from 'lodash-es/isEmpty'
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import React from 'react'
@@ -29,10 +28,7 @@ const MainPage: NextPage = () => {
     }, [localStorage])
 
     React.useEffect(() => {
-        if (
-            !isEmpty(asteroidsData) &&
-            !asteroidsData.near_earth_objects?.[currentDate]
-        ) {
+        if (!asteroidsData?.near_earth_objects?.[currentDate]) {
             getAsteroids(currentDate)
         }
     }, [asteroidsData, currentDate])

@@ -1,22 +1,30 @@
-name: UI Checks
+name: Quality Gate
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  checks:
+  sonarcloud:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: 18
-          cache: 'npm'
-          cache-dependency-path: yarn.lock
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -35,35 +43,17 @@ jobs:
         name: Install dependencies
         run: yarn install
 
-      - name: ESLint Check
-        run: yarn run eslint:check
-
-      - name: Prettier Check
-        run: yarn run prettier:check
-
-      - name: UI Unit Tests
-        run: yarn test
-
       - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         name: Configure Client
         run: |
           echo "NEXT_PUBLIC_API_URL = '${{ secrets.NEXT_PUBLIC_API_URL }}'
           NEXT_PUBLIC_API_KEY = '${{ secrets.NEXT_PUBLIC_API_KEY }}'" > .env
 
-      - name: Cache UI build
-        uses: actions/cache@v3
-        id: cache-build
-        with:
-          path: out
-          key: ${{ runner.os }}-build-${{ hashFiles('**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+      - name: UI Unit Tests
+        run: yarn test
 
-      - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
-        name: Build UI
-        run: |
-          export dateNow=$(date +"%Y-%m-%dT%H:%M")
-          echo "export const update = '$dateNow'" > update.ts
-          yarn build
-          yarn export
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
