@@ -1186,6 +1186,11 @@ ast-types-flow@^0.0.7:
   resolved "https://registry.npmjs.org/ast-types-flow/-/ast-types-flow-0.0.7.tgz"
   integrity sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==
 
+asteroid-loading-spinner@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/asteroid-loading-spinner/-/asteroid-loading-spinner-2.0.2.tgz#f6d40db4e8d97b84ee23e7e43b1858691a633226"
+  integrity sha512-39iCUpKmhZJfBCHsjiTVcHUvqvlxGWuhNb2Cn7vAOrWfPIaf/eUTcttM5gYf0Ae5ld2qHw5REoOA8HA3CEa2Bg==
+
 available-typed-arrays@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
