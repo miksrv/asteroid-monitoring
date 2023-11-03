@@ -5,6 +5,13 @@ const config: Config.InitialOptions = {
     collectCoverageFrom: [
         '**/*.{js,jsx,ts,tsx}',
         '!**/*.d.ts',
+        '!**/api.ts',
+        '!**/types.ts',
+        '!**/store.ts',
+        '!jest.config.ts',
+        '!update.ts',
+        '!components/**/index.ts',
+        '!pages/**',
         '!**/node_modules/**',
         '!<rootDir>/out/**',
         '!<rootDir>/.next/**',
@@ -26,6 +33,7 @@ const config: Config.InitialOptions = {
         '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
 
         // Handle module aliases
+        '^@/(.*)$': '<rootDir>/$1',
         '^@/functions/(.*)$': '<rootDir>/functions/$1',
         '^@/public/(.*)$': '<rootDir>/public/$1'
     },

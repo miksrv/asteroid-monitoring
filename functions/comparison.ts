@@ -21,7 +21,7 @@ import imgStatueLiberty from '@/public/images/statue-of-liberty.png'
 import imgTajMahal from '@/public/images/taj-mahal.png'
 
 export type TComparison = {
-    img: StaticImageData
+    img: StaticImageData | any
     text: string
 }
 
@@ -32,7 +32,7 @@ export const comparisonSize = (asteroidSize: number): TComparison => {
             text: 'Гитара'
         }
     }
-    if (asteroidSize <= 2) {
+    if (asteroidSize === 2) {
         return {
             img: imgDoor,
             text: 'Дверь'
