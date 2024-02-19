@@ -9,5 +9,16 @@
     "bracketSameLine": false,
     "arrowParens": "always",
     "endOfLine": "lf",
-    "singleAttributePerLine": true
+    "singleAttributePerLine": true,
+    "importOrder": [
+        "@/types",
+        "@/components/(.*)$",
+        "@/public/(.*)$",
+        "@/update",
+        "@/data/(.*)$",
+        "^[./]"
+    ],
+    "importOrderGroupNamespaceSpecifiers": true,
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
 }
