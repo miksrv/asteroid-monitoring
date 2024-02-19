@@ -73,4 +73,3 @@ jobs:
           export dateNow=$(date +"%Y-%m-%dT%H:%M")
           echo "export const update = '$dateNow'" > update.ts
           yarn build
-          yarn export
