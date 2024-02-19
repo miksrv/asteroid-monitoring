@@ -1,6 +1,11 @@
+import { RootState } from '@/api/store'
 import { ApiNasaResponse } from '@/api/types'
+import type { Action, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
+
+const isHydrateAction = (action: Action): action is PayloadAction<RootState> =>
+    action.type === HYDRATE
 
 export const API = createApi({
     baseQuery: fetchBaseQuery({
@@ -12,8 +17,8 @@ export const API = createApi({
                 `?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${date}&end_date=${date}`
         })
     }),
-    extractRehydrationInfo(action, { reducerPath }) {
-        if (action.type === HYDRATE) {
+    extractRehydrationInfo(action, { reducerPath }): any {
+        if (isHydrateAction(action)) {
             return action.payload[reducerPath]
         }
     },
