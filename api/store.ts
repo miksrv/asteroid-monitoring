@@ -1,7 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
 import { API } from './api'
+
+import { configureStore } from '@reduxjs/toolkit'
 
 export const store = () =>
     configureStore({
@@ -13,6 +14,5 @@ export const store = () =>
 
 export type AppStore = ReturnType<typeof store>
 export type RootState = ReturnType<AppStore['getState']>
-// export type AppDispatch = AppStore['dispatch']
 
 export const wrapper = createWrapper<AppStore>(store, { debug: false })
