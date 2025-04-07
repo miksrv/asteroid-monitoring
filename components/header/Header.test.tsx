@@ -1,7 +1,10 @@
+import React from 'react'
+
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
 
 import { Header } from './Header'
+
+import { render, screen } from '@testing-library/react'
 
 jest.mock('next/image', () => ({
     __esModule: true,
