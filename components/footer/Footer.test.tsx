@@ -1,8 +1,10 @@
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
 import React from 'react'
 
+import '@testing-library/jest-dom'
+
 import Footer from './Footer'
+
+import { render, screen } from '@testing-library/react'
 
 // Mock the package.json data and update function
 jest.mock('@/package.json', () => ({ version: '1.0.0' }))

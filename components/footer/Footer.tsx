@@ -1,9 +1,9 @@
-import packageInfo from '@/package.json'
 import React from 'react'
 
-import { update } from '@/update'
-
 import styles from './styles.module.sass'
+
+import packageInfo from '@/package.json'
+import { update } from '@/update'
 
 export const Footer: React.FC = () => (
     <div className={styles.footer}>
@@ -19,8 +19,7 @@ export const Footer: React.FC = () => (
             />
             Mik
         </a>{' '}
-        {new Date().getFullYear()}, Version <span>{packageInfo.version}</span>{' '}
-        <span>({update})</span>
+        {new Date().getFullYear()}, Version <span>{packageInfo.version}</span> <span>({update})</span>
     </div>
 )
 
