@@ -1,7 +1,7 @@
 import { HYDRATE } from 'next-redux-wrapper'
 
 import { RootState } from '@/api/store'
-import { ApiNasaResponse, Asteroid } from '@/api/types'
+import { ApiNasaResponse, AsteroidData } from '@/api/types'
 import type { Action, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -18,7 +18,7 @@ export const API = createApi({
         getAsteroidsList: builder.mutation<ApiNasaResponse, string>({
             query: (date) => `feed?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${date}&end_date=${date}`
         }),
-        getAsteroidData: builder.mutation<Asteroid, number>({
+        getAsteroidData: builder.mutation<AsteroidData, number>({
             query: (id) => `neo/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
         })
     }),

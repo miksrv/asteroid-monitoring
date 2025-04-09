@@ -6,11 +6,11 @@ export interface ApiNasaResponse {
     }
     element_count?: number
     near_earth_objects?: {
-        [key: string]: AsteroidData[]
+        [key: string]: AsteroidListData[]
     }
 }
 
-export interface AsteroidData {
+export interface AsteroidListData {
     links?: {
         self: string
     }
@@ -63,7 +63,6 @@ export interface AsteroidApproach {
 export enum OrbitingBody {
     Earth
 }
-
 
 /// -------------/ NASA API RESPONSE -------------
 
@@ -128,7 +127,7 @@ export interface OrbitalData {
     }
 }
 
-export interface Asteroid {
+export interface AsteroidData {
     links: NasaLinks
     id: string
     neo_reference_id: string
