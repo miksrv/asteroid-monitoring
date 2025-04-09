@@ -8,9 +8,7 @@ import { formatDate } from '@/tools/date'
 import { update } from '@/update'
 
 export const Footer: React.FC = () => (
-    <footer
-        className={styles.footer}
-    >
+    <footer className={styles.footer}>
         <div>Powered by NextJS + TypeScript + Redux.</div>
         <div>
             Copyright ©

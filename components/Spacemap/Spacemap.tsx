@@ -125,9 +125,9 @@ export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
 
     return (
         <div
-                id={'my-container'}
-                style={{ width: '100%', height: '100%', minHeight: '500px' }}
-            />
+            id={'my-container'}
+            style={{ width: '100%', height: '100%', minHeight: '500px' }}
+        />
     )
 }
 
