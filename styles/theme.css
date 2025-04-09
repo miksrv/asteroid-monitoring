@@ -2,5 +2,41 @@
     --text-color-primary: #d2e1e8;
     --text-color-secondary: #83959b;
 
-    --color-live: #47da84
+    --color-green: #47da84;
+    --color-red: #fb5252;
+
+    --color-orange: #f8a01c;
+    --color-orange-hover: #ee9a1d;
+    --color-orange-active: #e4941f;
+    --color-orange-background: #5e5443;
+
+    --modal-background: #2c2d2e;
+    --overlay-background: rgba(0, 0, 0, 0.6);
+
+    /* Layout and Containers */
+    --body-background: #1b1b1b;
+    --border-radius: 6px;
+
+    /* Buttons */
+    --button-primary-color: var(--body-background);
+    --button-primary-background: var(--text-color-primary);
+    --button-primary-background-hover: #ebedf0;
+    --button-primary-background-active: #d7d8db;
+
+    --button-secondary-background: rgba(255, 255, 255, 0.1);
+    --button-secondary-background-hover: rgba(255, 255, 255, 0.12);
+    --button-secondary-background-active: rgba(255, 255, 255, 0.14);
+    --button-secondary-color: var(--text-color-primary);
+    --button-secondary-color-hover: var(--text-color-primary);
+    --button-secondary-color-active: var(--text-color-primary);
+
+    /* Input Fields and Dropdowns */
+    --dropdown-background-color: #232324;
+    --dropdown-background-color-hover: #3a3a3b;
+    --dropdown-badge-background-color: #505050;
+    --input-background-color: #232324;
+    --input-label-color: #969a9f;
+    --input-border: 0.5px solid var(--input-border-color);
+    --input-border-color: #444546;
+    --input-border-focus-color: var(--color-orange);
 }
