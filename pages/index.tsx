@@ -69,9 +69,9 @@ const HomePage: NextPage = () => {
                 openGraph={{
                     images: [
                         {
-                            height: 819,
+                            height: 1536,
                             url: '/images/demo.jpg',
-                            width: 1280
+                            width: 2146
                         }
                     ],
                     locale: 'ru'

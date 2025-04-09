@@ -50,8 +50,7 @@ jobs:
             - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
               name: Configure Client
               run: |
-                  echo "NEXT_PUBLIC_API_URL = '${{ secrets.NEXT_PUBLIC_API_URL }}'
-                  NEXT_PUBLIC_API_KEY = '${{ secrets.NEXT_PUBLIC_API_KEY }}'" > .env
+                  echo "NEXT_PUBLIC_API_KEY = '${{ secrets.NEXT_PUBLIC_API_KEY }}'" > .env
 
             - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
               name: Build UI

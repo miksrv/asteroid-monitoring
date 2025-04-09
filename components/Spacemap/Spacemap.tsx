@@ -113,7 +113,6 @@ export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
             obj.initRotation()
             obj.startRotation()
 
-            // Add some light.
             viz.createLight([0, 0, 0])
             viz.createAmbientLight()
 
