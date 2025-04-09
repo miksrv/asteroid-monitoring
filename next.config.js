@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // unoptimized - When true, the source image will be served as-is instead of changing quality,
-    // size, or format. Defaults to false.
+    compiler: {
+        removeConsole: process.env.NODE_ENV === 'production'
+    },
     images: {
         unoptimized: true
     },
-    output: 'export'
+    output: 'export',
+    reactStrictMode: false,
 }
 
 module.exports = nextConfig

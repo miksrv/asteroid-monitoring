@@ -5,13 +5,6 @@ const config: Config.InitialOptions = {
     collectCoverageFrom: [
         '**/*.{js,jsx,ts,tsx}',
         '!**/*.d.ts',
-        '!**/api.ts',
-        '!**/types.ts',
-        '!**/store.ts',
-        '!jest.config.ts',
-        '!update.ts',
-        '!components/**/index.ts',
-        '!pages/**',
         '!**/node_modules/**',
         '!<rootDir>/out/**',
         '!<rootDir>/.next/**',
@@ -34,9 +27,13 @@ const config: Config.InitialOptions = {
 
         // Handle module aliases
         '^@/(.*)$': '<rootDir>/$1',
+        '^@/api/(.*)$': '<rootDir>/api/$1',
+        '^@/components/(.*)$': '<rootDir>/components/$1',
         '^@/functions/(.*)$': '<rootDir>/functions/$1',
-        '^@/public/(.*)$': '<rootDir>/public/$1'
+        '^@/public/(.*)$': '<rootDir>/public/$1',
+        '^@/styles/(.*)$': '<rootDir>/styles/$1'
     },
+    setupFilesAfterEnv: ['<rootDir>/setupTests.config.tsx'],
     silent: true, // hide all warnings
     testEnvironment: 'jsdom',
     testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
@@ -45,10 +42,7 @@ const config: Config.InitialOptions = {
         // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
         '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
     },
-    transformIgnorePatterns: [
-        '/node_modules/',
-        '^.+\\.module\\.(css|sass|scss)$'
-    ]
+    transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$']
 }
 
 export default config

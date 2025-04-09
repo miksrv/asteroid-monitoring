@@ -1,0 +1,97 @@
+.asteroidContainer
+    margin: 0 0 2rem 0
+    padding: 20px
+    border: 0.5px solid rgba(17, 17, 19, .95)
+    border-radius: 10px
+    background: linear-gradient(180deg, rgba(17, 17, 19, .95) 10%, rgba(17, 17, 19, .75))
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+
+    @media only screen and (max-width: 768px)
+        flex-wrap: wrap
+
+    &.dangerousBorder
+        border: 0.5px solid var(--color-red)
+
+    .title
+        margin: 0 0 10px
+        height: 28px
+
+    .dataBlock
+        .label
+            color: var(--text-color-secondary)
+            text-transform: uppercase
+            margin-bottom: -8px
+            font-weight: 500
+            font-size: 90%
+
+        .text
+            color: var(--text-color-primary)
+
+    .dateDay, .distanceValue
+        font-weight: 500
+        font-size: 105%
+
+    .dateTime, .distanceUnit
+        margin-left: 5px
+        font-size: 90%
+
+    .asteroidSection
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        text-align: center
+
+        .asteroidImage
+            background-image: url('../../public/rock.svg')
+            background-size: cover
+            height: 80px
+            width: 80px
+
+        .rulerImage
+            background-image: url('../../public/ruler.svg')
+            background-size: cover
+            height: 11px
+            width: 83px
+
+        .diameter
+            .value
+                font-weight: 500
+                font-size: 105%
+
+            .unit
+                margin-left: 5px
+                font-size: 90%
+
+        .estimated
+            font-size: 11px
+            line-height: 10px
+            color: var(--text-color-secondary)
+
+    .countdownSection
+        @media only screen and (max-width: 768px)
+            margin-top: 20px
+            flex-grow: 1
+            width: 100%
+            display: flex
+            flex-wrap: wrap
+
+        .moreButton
+            margin-top: 20px
+
+.dangerous, .notDangerous
+    background-color: #fb5252
+    color: #fff
+    font-weight: 400
+    border: none
+    border-radius: 5px
+    padding: 0 7px
+    margin-bottom: 10px
+    height: 28px
+    width: fit-content
+
+.notDangerous
+    background-color: var(--color-green)
+    color: #000
