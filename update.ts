@@ -1,1 +1,1 @@
-export const update = '23.07.2023'
+export const update = '2025-04-09T11:00'
