@@ -1,6 +1,10 @@
 import dayjs from 'dayjs'
 
+import 'dayjs/locale/ru'
+
 const DEFAULT_FORMAT = 'D MMM YYYY HH:mm:ss'
 
-export const formatUnixTime = (unix?: number, format?: string) =>
-    unix ? dayjs(unix).format(format || DEFAULT_FORMAT) : ''
+dayjs.locale('ru')
+
+export const formatDate = (date?: string | number, format?: string) =>
+    date ? dayjs(date).format(format || DEFAULT_FORMAT) : ''
