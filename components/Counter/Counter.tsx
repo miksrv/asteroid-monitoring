@@ -12,14 +12,12 @@ export const Counter: React.FC<CounterProps> = ({ total, dangerous }) => (
         {(!!total || !!dangerous) && <div className={styles.divider} />}
         {!!total && (
             <div>
-                <span className={styles.totalNumber}>{total}</span> Найдено
-                астероидов
+                <span className={styles.totalNumber}>{total}</span> Найдено астероидов
             </div>
         )}
         {!!dangerous && (
             <div>
-                <span className={styles.dangerNumber}>{dangerous}</span>{' '}
-                Потенциально опасных
+                <span className={styles.dangerNumber}>{dangerous}</span> Потенциально опасных
             </div>
         )}
     </div>
