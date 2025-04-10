@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
 import { NextPage } from 'next'
 // import { useTranslation } from 'next-i18next'
 import { NextSeo } from 'next-seo'
-import { Skeleton } from 'simple-react-ui-kit'
+import { Button, Skeleton } from 'simple-react-ui-kit'
 
 import API from '@/api/api'
 import { ApiNasaResponse, AsteroidData } from '@/api/types'
@@ -24,6 +24,8 @@ const HomePage: NextPage = () => {
 
     const currentDate = formatDate(new Date().toISOString(), 'YYYY-MM-DD')
     const [localStorage, setLocalStorage] = useLocalStorage<string>('asteroids', '{}')
+    const [clientHeight, setClientHeight] = useState<number>(500)
+
     const [getAsteroidsList, { data, isLoading }] = API.useGetAsteroidsListMutation()
     const [getAsteroidData, { data: asteroidData, isLoading: asteroidLoading }] = API.useGetAsteroidDataMutation()
 
@@ -32,7 +34,36 @@ const HomePage: NextPage = () => {
         [localStorage]
     )
 
-    React.useEffect(() => {
+    const asteroidDiameters = asteroidsData.near_earth_objects?.[currentDate]
+        ?.map((asteroid) => {
+            const diameterMax = asteroid.estimated_diameter?.meters?.estimated_diameter_max
+            const diameterMin = asteroid.estimated_diameter?.meters?.estimated_diameter_min
+            return diameterMax && diameterMin ? Math.round((diameterMax + diameterMin) / 2) : undefined
+        })
+        ?.filter((diameter) => diameter !== undefined)
+
+    const handleCloseDialog = () => {
+        setAsteroidId(undefined)
+        setLocalAsteroidData(undefined)
+    }
+
+    useEffect(() => {
+        const updateClientHeight = () => {
+            if (window?.innerHeight) {
+                setClientHeight(document.body.offsetHeight)
+            }
+        }
+
+        updateClientHeight()
+
+        window.addEventListener('resize', updateClientHeight)
+
+        return () => {
+            window.removeEventListener('resize', updateClientHeight)
+        }
+    }, [])
+
+    useEffect(() => {
         if (
             localStorage === '{}' ||
             (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate])
@@ -50,14 +81,6 @@ const HomePage: NextPage = () => {
     useEffect(() => {
         setLocalAsteroidData(asteroidData)
     }, [asteroidData])
-
-    const asteroidDiameters = asteroidsData.near_earth_objects?.[currentDate]
-        ?.map((asteroid) => {
-            const diameterMax = asteroid.estimated_diameter?.meters?.estimated_diameter_max
-            const diameterMin = asteroid.estimated_diameter?.meters?.estimated_diameter_min
-            return diameterMax && diameterMin ? Math.round((diameterMax + diameterMin) / 2) : undefined
-        })
-        ?.filter((diameter) => diameter !== undefined)
 
     return (
         <>
@@ -96,48 +119,64 @@ const HomePage: NextPage = () => {
                         )?.length
                     }
                 />
-                {isLoading && (
+                {(isLoading || !asteroidsData || Object.keys(asteroidsData)?.length === 0) && (
                     <div className={'loader'}>
-                        <h2>Пожалуста, подождите</h2>
-                        <h4>Ищем приближающиеся к Земле астеродиы</h4>
+                        <h2>{'Пожалуста, подождите'}</h2>
+                        <h4>{'Ищем приближающиеся к Земле астеродиы'}</h4>
                         <AsteroidLoadingSpinner />
                     </div>
                 )}
-                {asteroidsData &&
-                    asteroidsData.near_earth_objects?.[currentDate]
-                        ?.sort(({ is_potentially_hazardous_asteroid }) => (is_potentially_hazardous_asteroid ? -1 : 1))
-                        .map((data) => (
-                            <Asteroid
-                                key={data?.id}
-                                data={data}
-                                maxDiameter={Math.max(...(asteroidDiameters || []))}
-                                minDiameter={Math.min(...(asteroidDiameters || []))}
-                                onClick={(id) => {
-                                    if (!!id && id !== asteroidId) {
-                                        getAsteroidData(id)
-                                        setAsteroidId(id)
-                                        setLocalAsteroidData(undefined)
-                                    } else {
-                                        setLocalAsteroidData(undefined)
-                                        setAsteroidId(undefined)
-                                    }
-                                }}
-                            />
-                        ))}
+
+                <div className={'asteroidList'}>
+                    {asteroidsData &&
+                        asteroidsData.near_earth_objects?.[currentDate]
+                            ?.sort(({ is_potentially_hazardous_asteroid }) =>
+                                is_potentially_hazardous_asteroid ? -1 : 1
+                            )
+                            .map((data) => (
+                                <Asteroid
+                                    key={data?.id}
+                                    data={data}
+                                    maxDiameter={Math.max(...(asteroidDiameters || []))}
+                                    minDiameter={Math.min(...(asteroidDiameters || []))}
+                                    onClick={(id) => {
+                                        if (!!id && id !== asteroidId) {
+                                            getAsteroidData(id)
+                                            setAsteroidId(id)
+                                            setLocalAsteroidData(undefined)
+                                        } else {
+                                            setLocalAsteroidData(undefined)
+                                            setAsteroidId(undefined)
+                                        }
+                                    }}
+                                />
+                            ))}
+                </div>
 
                 <Dialog
                     open={!!asteroidId}
-                    onCloseDialog={() => {
-                        setAsteroidId(undefined)
-                        setLocalAsteroidData(undefined)
-                    }}
+                    onCloseDialog={handleCloseDialog}
+                    header={`Орбита астероида ${clientHeight} ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
                     maxWidth={'90%'}
+                    actions={
+                        <Button
+                            icon={'Close'}
+                            size={'medium'}
+                            mode={'outline'}
+                            onClick={handleCloseDialog}
+                        />
+                    }
                 >
-                    {asteroidLoading ? (
-                        <Skeleton style={{ width: '100%', minHeight: '500px' }} />
-                    ) : (
-                        <Spacemap orbitalData={localAsteroidData?.orbital_data} />
-                    )}
+                    <div style={{ height: `${clientHeight - 200}px` }}>
+                        {asteroidLoading ? (
+                            <Skeleton style={{ width: '100%', height: '100%' }} />
+                        ) : (
+                            <Spacemap
+                                asteroidName={localAsteroidData?.name}
+                                orbitalData={localAsteroidData?.orbital_data}
+                            />
+                        )}
+                    </div>
                 </Dialog>
             </div>
             <Footer />

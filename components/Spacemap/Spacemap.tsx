@@ -4,10 +4,11 @@ import * as Spacekit from 'spacekit.js'
 import { OrbitalData } from '@/api/types'
 
 type AsteroidProps = {
+    asteroidName?: string
     orbitalData?: OrbitalData
 }
 
-export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
+export const Spacemap: React.FC<AsteroidProps> = ({ asteroidName, orbitalData }) => {
     useEffect(() => {
         const container = document.getElementById('my-container') as HTMLCanvasElement
 
@@ -41,7 +42,7 @@ export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
             viz.createObject('neptune', Spacekit.SpaceObjectPresets.NEPTUNE)
 
             viz.createSphere('earth', {
-                textureUrl: './earthtexture.jpg',
+                textureUrl: './images/earthtexture.jpg',
                 radius: 0.01, // Exxagerate size
                 ephem: Spacekit.EphemPresets.EARTH,
                 levelsOfDetail: [
@@ -87,15 +88,15 @@ export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
                 'deg'
             )
 
-            const obj = viz.createShape('myobj', {
+            const asteroid = viz.createShape('asteroid', {
                 ephem,
+                labelText: asteroidName,
                 ecliptic: {
                     displayLines: true,
                     lineColor: 0xff0000
                 },
                 shape: {
-                    shapeUrl:
-                        'https://raw.githubusercontent.com/typpo/spacekit/master/examples/asteroid_shape_from_earth/A1046.M1863.obj'
+                    shapeUrl: './A1046.M1863.obj'
                 },
                 rotation: {
                     lambdaDeg: 251,
@@ -110,15 +111,15 @@ export const Spacemap: React.FC<AsteroidProps> = ({ orbitalData }) => {
                 }
             })
 
-            obj.initRotation()
-            obj.startRotation()
+            asteroid.initRotation()
+            asteroid.startRotation()
 
             viz.createLight([0, 0, 0])
             viz.createAmbientLight()
 
-            viz.zoomToFit(obj, 0.1)
+            viz.zoomToFit(asteroid, 0.1)
 
-            viz.getViewer().followObject(obj, [-0.01, -0.01, 0.01])
+            viz.getViewer().followObject(asteroid, [-0.01, -0.01, 0.01])
         }
     }, [orbitalData])
 

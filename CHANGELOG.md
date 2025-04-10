@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- Improved styles for Asteroid and Footer UI components
+- Added some information for package.json
+- Fixed HTML header for dark mode
+- Refactoring and optimized main page
+- Improved show loading spinner
+- Added local model `A1046.M1863.obj` for asteroid
+- Changed directory for local images
+- Improved global styles and CSS variables
+- Improved styles for Dialog UI component
+- Improved README.md
+- Fixed UI manifest, UI dark mode
+- Changed UI modal size, added close button
+
 ## 1.1.0
 
 ### Minor Changes

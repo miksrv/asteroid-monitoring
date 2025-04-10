@@ -4,7 +4,7 @@
 A web application for real-time tracking of near-Earth objects using NASA's NeoWS (Near-Earth Object Web Service) API. Built with Next.js, TypeScript, and Redux.
 
 <div align="center">
-  <!--<img src="https://miksoft.pro/_next/static/media/meteostation.de6617a7.jpg" alt="Asteroid Monitoring" width="150" height="150"> -->
+  <img src="https://miksoft.pro/_next/static/media/asteroid.60cc340b.jpg" alt="Asteroid Monitoring" width="150" height="150">
 
 <h3>Asteroid Monitoring</h3>
 
@@ -116,7 +116,16 @@ cd asteroid-monitoring
    yarn install
    ```
 
-3. Run the frontend in development mode:
+3. Generate your API key to access the NASA NeoWS API. Go to [NASA API](https://api.nasa.gov/) and get your key via email.
+
+
+4. Create a `.env` file in the root directory of the project and add your API key:
+
+   ```bash
+   NEXT_PUBLIC_API_KEY=your_api_key_here
+   ```
+
+5. Run the frontend in development mode:
 
    ```bash
    yarn run dev

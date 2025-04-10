@@ -1,6 +1,11 @@
 {
     "name": "asteroid-monitoring",
-    "version": "1.1.0",
+    "description": "A web application for real-time tracking of near-Earth objects using NASA's NeoWS (Near-Earth Object Web Service) API. Built with Next.js, TypeScript, and Redux.",
+    "repository": "https://github.com/miksrv/asteroid-monitoring",
+    "keywords": ["react", "nodejs", "science", "typescript", "astronomy", "nasa", "space", "nextjs", "asteroids"],
+    "author": "Misha Topchilo <20854498+miksrv@users.noreply.github.com>",
+    "license": "MIT",
+    "version": "1.1.1",
     "scripts": {
         "dev": "next dev",
         "build": "next build",

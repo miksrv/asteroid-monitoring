@@ -14,8 +14,25 @@ const App = ({ Component, pageProps }: AppProps) => {
         <>
             <Head>
                 <meta
+                    name={'mobile-web-app-capable'}
+                    content={'yes'}
+                />
+                <meta
                     name={'viewport'}
-                    content={'width=device-width, initial-scale=1, shrink-to-fit=no'}
+                    content={'width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no'}
+                />
+                <meta
+                    name={'apple-mobile-web-app-status-bar-style'}
+                    content={'black-translucent'}
+                />
+                <meta
+                    name={'theme-color'}
+                    content={'#2c2d2e'}
+                    media={'(prefers-color-scheme: dark)'}
+                />
+                <meta
+                    name={'theme-color'}
+                    content={'#2c2d2e'}
                 />
                 <link
                     rel={'apple-touch-icon'}
