@@ -156,7 +156,7 @@ const HomePage: NextPage = () => {
                 <Dialog
                     open={!!asteroidId}
                     onCloseDialog={handleCloseDialog}
-                    header={`Орбита астероида ${clientHeight} ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
+                    header={`Орбита астероида ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
                     maxWidth={'90%'}
                     actions={
                         <Button
