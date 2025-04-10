@@ -6,8 +6,7 @@ import type { Action, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const isHydrateAction = (action: Action): action is PayloadAction<RootState> => action.type === HYDRATE
-// http://api.nasa.gov/neo/rest/v1/neo/2474163?api_key=lCr0fgpblRx6TI1nzHRvFDh2e8fWrw2ARXMe4H7Q
-// https://api.nasa.gov/neo/rest/v1/feed
+
 const API_URL = 'https://api.nasa.gov/neo/rest/v1/'
 
 export const API = createApi({
