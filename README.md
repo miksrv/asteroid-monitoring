@@ -80,14 +80,14 @@
 
 ### 📊 Data Displayed for Each Asteroid
 
-| Metric | Description |
-|--------|-------------|
-| **Close Approach Time** | Exact date and time of closest Earth approach |
-| **Miss Distance** | Minimum distance from Earth (in km and lunar distances) |
-| **Relative Velocity** | Speed relative to Earth (km/s and km/h) |
-| **Estimated Diameter** | Size range based on absolute magnitude |
-| **Hazard Classification** | Potentially Hazardous Asteroid (PHA) indicator |
-| **3D Orbit Viewer** | Interactive orbital trajectory visualization |
+| Metric                    | Description                                             |
+| ------------------------- | ------------------------------------------------------- |
+| **Close Approach Time**   | Exact date and time of closest Earth approach           |
+| **Miss Distance**         | Minimum distance from Earth (in km and lunar distances) |
+| **Relative Velocity**     | Speed relative to Earth (km/s and km/h)                 |
+| **Estimated Diameter**    | Size range based on absolute magnitude                  |
+| **Hazard Classification** | Potentially Hazardous Asteroid (PHA) indicator          |
+| **3D Orbit Viewer**       | Interactive orbital trajectory visualization            |
 
 ### Why Asteroid Monitoring?
 
@@ -100,18 +100,18 @@ Near-Earth objects (NEOs) are asteroids and comets with orbits that bring them c
 
 ### Key Features
 
-| Feature | Description |
-|---------|-------------|
-| 🌍 **Real-Time NASA Data** | Fetches daily near-Earth object data directly from NASA's NeoWS API |
-| 📋 **Comprehensive Dashboard** | Lists all asteroids with close approaches scheduled for today |
-| ⏱️ **Detailed Metrics** | Shows approach time, miss distance, velocity, and estimated diameter |
-| 🛑 **Hazard Alerts** | Highlights Potentially Hazardous Asteroids (PHAs) with visual indicators |
-| 🛰️ **3D Orbit Visualization** | Interactive WebGL-powered orbital viewer using spacekit.js |
-| 🌐 **Multilingual Support** | Bilingual interface (Russian/English) with automatic browser locale detection |
-| ⚡ **Offline Capability** | API responses cached in localStorage for instant repeat access |
-| 🚀 **Zero-Server Deployment** | Static HTML export — deploy anywhere without backend infrastructure |
-| 📱 **Responsive Design** | Optimized for desktop, tablet, and mobile viewing |
-| 🌙 **Dark Mode** | Eye-friendly dark theme with CSS custom properties |
+| Feature                        | Description                                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------- |
+| 🌍 **Real-Time NASA Data**     | Fetches daily near-Earth object data directly from NASA's NeoWS API           |
+| 📋 **Comprehensive Dashboard** | Lists all asteroids with close approaches scheduled for today                 |
+| ⏱️ **Detailed Metrics**        | Shows approach time, miss distance, velocity, and estimated diameter          |
+| 🛑 **Hazard Alerts**           | Highlights Potentially Hazardous Asteroids (PHAs) with visual indicators      |
+| 🛰️ **3D Orbit Visualization**  | Interactive WebGL-powered orbital viewer using spacekit.js                    |
+| 🌐 **Multilingual Support**    | Bilingual interface (Russian/English) with automatic browser locale detection |
+| ⚡ **Offline Capability**      | API responses cached in localStorage for instant repeat access                |
+| 🚀 **Zero-Server Deployment**  | Static HTML export — deploy anywhere without backend infrastructure           |
+| 📱 **Responsive Design**       | Optimized for desktop, tablet, and mobile viewing                             |
+| 🌙 **Dark Mode**               | Eye-friendly dark theme with CSS custom properties                            |
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -143,10 +143,10 @@ Follow these steps to set up the project locally and start tracking asteroids in
 
 Ensure you have the following installed:
 
-| Tool | Version | Notes |
-|------|---------|-------|
-| **Node.js** | v20.11.0+ | Check `.nvmrc` for exact version |
-| **Yarn** | 4.x | Enable via `corepack enable && corepack prepare yarn@4.9.2 --activate` |
+| Tool        | Version   | Notes                                                                  |
+| ----------- | --------- | ---------------------------------------------------------------------- |
+| **Node.js** | v20.11.0+ | Check `.nvmrc` for exact version                                       |
+| **Yarn**    | 4.x       | Enable via `corepack enable && corepack prepare yarn@4.9.2 --activate` |
 
 ### Installation
 
@@ -226,6 +226,7 @@ asteroid-monitoring/
 ```
 
 **Data Flow:**
+
 1. User visits the dashboard
 2. RTK Query fetches today's NEO data from NASA NeoWS API
 3. Response is cached in localStorage for offline access
