@@ -3,13 +3,20 @@
 <!-- PROJECT TITLE -->
 
 <div align="center">
-  <img src="https://miksoft.pro/images/asteroid.webp" alt="Asteroid Monitoring" width="150" height="150">
+  <img src="https://miksoft.pro/images/asteroid.webp" alt="Asteroid Monitoring - Near-Earth Object Tracker" width="150" height="150">
 
-<h3>Asteroid Monitoring</h3>
+<h3>🚀 Asteroid Monitoring</h3>
 
-<p>A web application for real-time tracking of near-Earth objects using NASA's NeoWS API.</p>
+<p><strong>Real-Time Near-Earth Object (NEO) Tracking Dashboard</strong></p>
+<p>An open-source web application for monitoring asteroids approaching Earth today — powered by NASA's Near Earth Object Web Service (NeoWS) API with interactive 3D orbital visualization.</p>
 
-<a href="https://asteroid.miksoft.pro/" target="_blank">Live Demo</a>
+<a href="https://asteroid.miksoft.pro/" target="_blank"><strong>🌐 Explore Live Demo »</strong></a>
+<br /><br />
+<a href="#installation">Quick Start</a>
+·
+<a href="#key-features">Features</a>
+·
+<a href="#contributing">Contribute</a>
 ·
 <a href="#contact">Contact</a>
 
@@ -37,52 +44,82 @@
 
 <!-- TABLE OF CONTENTS -->
 
-### Table of Contents
+### 📋 Table of Contents
+
+<details>
+<summary>Click to expand</summary>
 
 - [About the Project](#about-the-project)
+    - [Why Asteroid Monitoring?](#why-asteroid-monitoring)
     - [Key Features](#key-features)
-    - [Built With](#built-with)
-- [Installation](#installation)
+    - [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Available Scripts](#available-scripts)
 - [Live Demo](#live-demo)
+- [Project Architecture](#project-architecture)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 - [Contact](#contact)
 
+</details>
+
 <!-- ABOUT THE PROJECT -->
 
-## About the Project
+## 🌍 About the Project
 
-Asteroid Monitoring is a web application that fetches and visualizes real-time data about near-Earth objects (NEOs) using the [NASA NeoWS API](https://api.nasa.gov/). It displays all asteroids making a close approach to Earth on the current day, giving users an at-a-glance view of each object's key characteristics.
+**Asteroid Monitoring** is a modern, open-source web application that provides real-time tracking of near-Earth objects (NEOs) using [NASA's NeoWS (Near Earth Object Web Service) API](https://api.nasa.gov/). The dashboard displays comprehensive data about asteroids making close approaches to Earth today, enabling users to explore space science interactively.
 
-![Asteroid Monitoring Demo](public/images/demo.jpg)
+<div align="center">
 
-For each asteroid the application shows:
+![Asteroid Monitoring Dashboard - Near-Earth Object Tracker](public/images/demo.jpg)
 
-- Date and time of close approach
-- Miss distance from Earth
-- Relative velocity
-- Estimated diameter range
-- Interactive 3D orbit visualization powered by spacekit.js
+</div>
 
-Asteroids whose trajectories bring them within a defined distance of Earth's orbit are flagged as **potentially hazardous**. NASA's database currently tracks over 33,000 near-Earth objects, and the count grows continuously as new discoveries are made.
+### 📊 Data Displayed for Each Asteroid
+
+| Metric | Description |
+|--------|-------------|
+| **Close Approach Time** | Exact date and time of closest Earth approach |
+| **Miss Distance** | Minimum distance from Earth (in km and lunar distances) |
+| **Relative Velocity** | Speed relative to Earth (km/s and km/h) |
+| **Estimated Diameter** | Size range based on absolute magnitude |
+| **Hazard Classification** | Potentially Hazardous Asteroid (PHA) indicator |
+| **3D Orbit Viewer** | Interactive orbital trajectory visualization |
+
+### Why Asteroid Monitoring?
+
+Near-Earth objects (NEOs) are asteroids and comets with orbits that bring them close to Earth's path around the Sun. NASA's Center for Near Earth Object Studies (CNEOS) currently tracks **over 35,000 NEOs**, with new discoveries made weekly. Understanding these objects is crucial for:
+
+- 🔬 **Scientific Research** — Studying asteroid composition and orbital dynamics
+- 🛡️ **Planetary Defense** — Monitoring potentially hazardous objects (PHAs)
+- 📚 **Education** — Making space science accessible to everyone
+- 🌌 **Space Exploration** — Identifying targets for future missions
 
 ### Key Features
 
-- 🌍 Fetches daily near-Earth object data from the NASA NeoWS API
-- 📋 Lists all asteroids with a close approach scheduled for today
-- ⏱️ Shows approach time, miss distance, relative velocity, and estimated size
-- 🛑 Highlights potentially hazardous asteroids
-- 🛰️ Interactive 3D orbit visualization for each object
-- 🌐 Bilingual interface: Russian and English (auto-detected from browser locale)
-- ⚡ Offline-capable: API responses are cached in localStorage to minimize repeated requests
-- ⚙️ Statically exported — deploys as plain HTML with no server required
+| Feature | Description |
+|---------|-------------|
+| 🌍 **Real-Time NASA Data** | Fetches daily near-Earth object data directly from NASA's NeoWS API |
+| 📋 **Comprehensive Dashboard** | Lists all asteroids with close approaches scheduled for today |
+| ⏱️ **Detailed Metrics** | Shows approach time, miss distance, velocity, and estimated diameter |
+| 🛑 **Hazard Alerts** | Highlights Potentially Hazardous Asteroids (PHAs) with visual indicators |
+| 🛰️ **3D Orbit Visualization** | Interactive WebGL-powered orbital viewer using spacekit.js |
+| 🌐 **Multilingual Support** | Bilingual interface (Russian/English) with automatic browser locale detection |
+| ⚡ **Offline Capability** | API responses cached in localStorage for instant repeat access |
+| 🚀 **Zero-Server Deployment** | Static HTML export — deploy anywhere without backend infrastructure |
+| 📱 **Responsive Design** | Optimized for desktop, tablet, and mobile viewing |
+| 🌙 **Dark Mode** | Eye-friendly dark theme with CSS custom properties |
 
 <p align="right">
   (<a href="#top">Back to top</a>)
 </p>
 
-### Built With
+### Tech Stack
+
+This project leverages modern web technologies for optimal performance, maintainability, and developer experience:
 
 - [![TypeScript][ts-badge]][ts-url] Strongly typed JavaScript for safer, more maintainable code.
 - [![NextJS][nextjs-badge]][nextjs-url] React framework used for static site generation (`output: 'export'`).
@@ -96,18 +133,22 @@ Asteroids whose trajectories bring them within a defined distance of Earth's orb
   (<a href="#top">Back to top</a>)
 </p>
 
-<!-- INSTALLATION -->
+<!-- GETTING STARTED -->
 
-## Installation
+## 🚀 Getting Started
 
-Follow these steps to run Asteroid Monitoring locally.
+Follow these steps to set up the project locally and start tracking asteroids in minutes.
 
 ### Prerequisites
 
-- **Node.js** v20.11.0 (see `.nvmrc`)
-- **Yarn** 4.x (`corepack enable && corepack prepare yarn@4.9.2 --activate`)
+Ensure you have the following installed:
 
-### Steps
+| Tool | Version | Notes |
+|------|---------|-------|
+| **Node.js** | v20.11.0+ | Check `.nvmrc` for exact version |
+| **Yarn** | 4.x | Enable via `corepack enable && corepack prepare yarn@4.9.2 --activate` |
+
+### Installation
 
 1. Clone the repository:
 
@@ -156,8 +197,40 @@ Follow these steps to run Asteroid Monitoring locally.
 
 ## Live Demo
 
-The production build is available at:
+Explore the production deployment:
+
 🌐 **[asteroid.miksoft.pro](https://asteroid.miksoft.pro/)**
+
+<p align="right">
+  (<a href="#top">Back to top</a>)
+</p>
+
+<!-- PROJECT ARCHITECTURE -->
+
+## 🏗️ Project Architecture
+
+```
+asteroid-monitoring/
+├── api/               # RTK Query API layer (endpoints, store, types)
+├── components/        # React components with co-located styles
+│   ├── Asteroid/      # Individual asteroid card
+│   ├── Countdown/     # Time-to-approach countdown
+│   ├── Spacemap/      # 3D orbital visualization (spacekit.js)
+│   └── ...
+├── pages/             # Next.js pages (index, _app, _document)
+├── public/
+│   ├── locales/       # i18n translation files (en, ru)
+│   └── images/        # Static assets
+├── styles/            # Global styles and CSS variables
+└── tools/             # Utility functions (date formatting, helpers)
+```
+
+**Data Flow:**
+1. User visits the dashboard
+2. RTK Query fetches today's NEO data from NASA NeoWS API
+3. Response is cached in localStorage for offline access
+4. Redux store distributes data to components
+5. UI renders asteroid cards with real-time approach countdowns
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -165,7 +238,7 @@ The production build is available at:
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome and greatly appreciated. Whether you are fixing a bug, improving documentation, or proposing a new feature — every contribution helps.
 
@@ -198,7 +271,7 @@ Please make sure your changes pass linting (`yarn eslint:check`), formatting (`y
 
 <!-- LICENSE -->
 
-## License
+## 📄 License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
@@ -208,11 +281,13 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- [NASA NeoWS API](https://api.nasa.gov/) — near-Earth object data
-- [spacekit.js](https://typpo.github.io/spacekit/) — 3D solar system visualization library
-- [simple-react-ui-kit](https://github.com/miksrv/simple-react-ui-kit) — UI component library
+This project wouldn't be possible without these amazing resources:
+
+- [NASA NeoWS API](https://api.nasa.gov/) — Comprehensive near-Earth object data source
+- [spacekit.js](https://typpo.github.io/spacekit/) — 3D solar system visualization library for WebGL
+- [simple-react-ui-kit](https://github.com/miksrv/simple-react-ui-kit) — Lightweight React UI component library
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -220,9 +295,12 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- CONTACT -->
 
-## Contact
+## 📬 Contact
 
-Misha — [miksoft.pro](https://miksoft.pro)
+**Misha Topchilo** — Developer & Maintainer
+
+- 🌐 Website: [miksoft.pro](https://miksoft.pro)
+- 💼 GitHub: [@miksrv](https://github.com/miksrv)
 
 <p align="right">
   (<a href="#top">Back to top</a>)
