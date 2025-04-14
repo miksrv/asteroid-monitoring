@@ -111,20 +111,22 @@ const HomePage: NextPage = () => {
                     планете. В настоящий момент в базе данных астероидов насчитывается порядка <b>33 тысяч</b> объектов
                     и каждый год эта база расширяется.
                 </p>
-                <Counter
-                    total={asteroidsData?.element_count}
-                    dangerous={
-                        asteroidsData?.near_earth_objects?.[currentDate]?.filter(
-                            (asteroid) => asteroid.is_potentially_hazardous_asteroid
-                        )?.length
-                    }
-                />
-                {(isLoading || !asteroidsData || Object.keys(asteroidsData)?.length === 0) && (
+
+                {isLoading || !asteroidsData || Object.keys(asteroidsData)?.length === 0 ? (
                     <div className={'loader'}>
                         <h2>{'Пожалуста, подождите'}</h2>
                         <h4>{'Ищем приближающиеся к Земле астеродиы'}</h4>
                         <AsteroidLoadingSpinner />
                     </div>
+                ) : (
+                    <Counter
+                        total={asteroidsData?.element_count}
+                        dangerous={
+                            asteroidsData?.near_earth_objects?.[currentDate]?.filter(
+                                (asteroid) => asteroid.is_potentially_hazardous_asteroid
+                            )?.length
+                        }
+                    />
                 )}
 
                 <div className={'asteroidList'}>

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated README.md
+- Fixed main page loader
+- Fixed code-style for Header UI component
+
 ## 1.1.1
 
 ### Patch Changes

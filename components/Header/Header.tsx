@@ -13,7 +13,7 @@ export const Header: React.FC = () => (
                 src={asteroidImage}
                 alt={'Астероид'}
             />
-            <h1 className={styles.title}>Мониторинг астероидов</h1>
+            <h1 className={styles.title}>{'Мониторинг астероидов'}</h1>
         </header>
         <div className={styles.divider} />
     </>
