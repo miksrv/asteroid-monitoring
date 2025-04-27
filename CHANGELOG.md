@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.3
+
+### Patch Changes
+
+- Fixed issue: blink overlay on load asteroid detailed data
+- Translated Countdown locales to RU
+- Implemented a new UI Detailed component to show asteroid orbit
+- Updated UI Libraries
+- Create .htaccess
+- Updated @reduxjs/toolkit version
+
 ## 1.1.2
 
 ### Patch Changes
