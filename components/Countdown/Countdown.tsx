@@ -42,7 +42,7 @@ export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) =>
 
     return (
         <div className={cn(styles.countdown, sign === '+' && styles.countdownPast, hazardous && styles.hazardous)}>
-            <span className={styles.title}>{'LIVE COUNTDOWN'}</span>
+            <span className={styles.title}>{'Обратный отсчет'}</span>
             <div className={styles.digitsContainer}>
                 <h5 className={styles.tText}>
                     {'T'}
@@ -50,22 +50,22 @@ export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) =>
                 </h5>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{Math.floor(durationTime.asDays()).toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'DAYS'}</span>
+                    <span className={styles.unit}>{'Дней'}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.hours().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'HOURS'}</span>
+                    <span className={styles.unit}>{'Часов'}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.minutes().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'MINUTES'}</span>
+                    <span className={styles.unit}>{'Минут'}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.seconds().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'SECONDS'}</span>
+                    <span className={styles.unit}>{'Секунд'}</span>
                 </div>
             </div>
         </div>

@@ -3,31 +3,28 @@ import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
 import { NextPage } from 'next'
 // import { useTranslation } from 'next-i18next'
 import { NextSeo } from 'next-seo'
-import { Button, Skeleton } from 'simple-react-ui-kit'
+import { Dialog } from 'simple-react-ui-kit'
 
 import API from '@/api/api'
-import { ApiNasaResponse, AsteroidData } from '@/api/types'
+import { ApiNasaResponse } from '@/api/types'
 import Asteroid from '@/components/Asteroid'
 import Counter from '@/components/Counter'
+import Detailed from '@/components/Detailed'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import Spacemap from '@/components/Spacemap'
 import { formatDate } from '@/tools/date'
 import { useLocalStorage } from '@/tools/useLocalStorage'
-import Dialog from '@/ui/dialog'
 
 const HomePage: NextPage = () => {
     // const { t } = useTranslation()
 
     const [asteroidId, setAsteroidId] = React.useState<number | undefined>()
-    const [localAsteroidData, setLocalAsteroidData] = React.useState<AsteroidData | undefined>()
 
     const currentDate = formatDate(new Date().toISOString(), 'YYYY-MM-DD')
     const [localStorage, setLocalStorage] = useLocalStorage<string>('asteroids', '{}')
     const [clientHeight, setClientHeight] = useState<number>(500)
 
     const [getAsteroidsList, { data, isLoading }] = API.useGetAsteroidsListMutation()
-    const [getAsteroidData, { data: asteroidData, isLoading: asteroidLoading }] = API.useGetAsteroidDataMutation()
 
     const asteroidsData: ApiNasaResponse = React.useMemo(
         () => (localStorage ? JSON.parse(localStorage) : {}),
@@ -44,7 +41,6 @@ const HomePage: NextPage = () => {
 
     const handleCloseDialog = () => {
         setAsteroidId(undefined)
-        setLocalAsteroidData(undefined)
     }
 
     useEffect(() => {
@@ -77,10 +73,6 @@ const HomePage: NextPage = () => {
             setLocalStorage(JSON.stringify(data))
         }
     }, [data])
-
-    useEffect(() => {
-        setLocalAsteroidData(asteroidData)
-    }, [asteroidData])
 
     return (
         <>
@@ -141,44 +133,22 @@ const HomePage: NextPage = () => {
                                     data={data}
                                     maxDiameter={Math.max(...(asteroidDiameters || []))}
                                     minDiameter={Math.min(...(asteroidDiameters || []))}
-                                    onClick={(id) => {
-                                        if (!!id && id !== asteroidId) {
-                                            getAsteroidData(id)
-                                            setAsteroidId(id)
-                                            setLocalAsteroidData(undefined)
-                                        } else {
-                                            setLocalAsteroidData(undefined)
-                                            setAsteroidId(undefined)
-                                        }
-                                    }}
+                                    onClick={(id) => setAsteroidId(!!id && id !== asteroidId ? id : undefined)}
                                 />
                             ))}
                 </div>
 
                 <Dialog
                     open={!!asteroidId}
+                    showCloseButton={true}
                     onCloseDialog={handleCloseDialog}
-                    header={`Орбита астероида ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
+                    title={`Орбита астероида ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
                     maxWidth={'90%'}
-                    actions={
-                        <Button
-                            icon={'Close'}
-                            size={'medium'}
-                            mode={'outline'}
-                            onClick={handleCloseDialog}
-                        />
-                    }
                 >
-                    <div style={{ height: `${clientHeight - 200}px` }}>
-                        {asteroidLoading ? (
-                            <Skeleton style={{ width: '100%', height: '100%' }} />
-                        ) : (
-                            <Spacemap
-                                asteroidName={localAsteroidData?.name}
-                                orbitalData={localAsteroidData?.orbital_data}
-                            />
-                        )}
-                    </div>
+                    <Detailed
+                        asteroidId={asteroidId}
+                        clientHeight={clientHeight}
+                    />
                 </Dialog>
             </div>
             <Footer />
