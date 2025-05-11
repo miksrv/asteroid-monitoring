@@ -6,6 +6,7 @@
 
 - Upgraded UI Libraries
 - Update main theme.css
+- Created new config for ESLint and Prettier
 
 ## 1.1.3
 
