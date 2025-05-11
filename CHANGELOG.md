@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.4
+
+### Patch Changes
+
+- Upgraded UI Libraries
+- 
+
 ## 1.1.3
 
 ### Patch Changes
