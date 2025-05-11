@@ -9,6 +9,7 @@
 - Created new config for ESLint and Prettier
 - Fixed config for Jest
 - Fixed code-style by ESLint and Prettier
+- Delete `install-state.gz` from repository
 
 ## 1.1.3
 
