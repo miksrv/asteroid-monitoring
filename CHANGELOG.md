@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - Upgraded UI Libraries
-- 
+- Update main theme.css
 
 ## 1.1.3
 
