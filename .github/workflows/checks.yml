@@ -48,8 +48,8 @@ jobs:
             - name: Prettier Check
               run: yarn run prettier:check
 
-#            - name: UI Unit Tests
-#              run: yarn test
+            #            - name: UI Unit Tests
+            #              run: yarn test
 
             - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
               name: Configure Client

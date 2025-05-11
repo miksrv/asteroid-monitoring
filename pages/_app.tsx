@@ -1,11 +1,12 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import '../styles/globals.sass'
-
 import { wrapper } from '@/api/store'
+
+import '../styles/globals.sass'
 
 const App = ({ Component, pageProps }: AppProps) => {
     const { store, props } = wrapper.useWrappedStore(pageProps)

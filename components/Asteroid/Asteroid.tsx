@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react'
 import { Button, cn } from 'simple-react-ui-kit'
 
-import styles from './styles.module.sass'
-
 import { AsteroidListData } from '@/api/types'
 import { Countdown } from '@/components/Countdown/Countdown'
 import { formatDate } from '@/tools/date'
 import { formatDistance } from '@/tools/helpers'
+
+import styles from './styles.module.sass'
 
 type AsteroidProps = {
     data: AsteroidListData
