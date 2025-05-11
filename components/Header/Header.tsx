@@ -1,9 +1,10 @@
 import React from 'react'
+
 import Image from 'next/image'
 
-import styles from './styles.module.sass'
-
 import asteroidImage from '@/public/images/asteroid.png'
+
+import styles from './styles.module.sass'
 
 export const Header: React.FC = () => (
     <>

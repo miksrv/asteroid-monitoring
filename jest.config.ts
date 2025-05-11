@@ -29,7 +29,7 @@ const config: Config.InitialOptions = {
         '^@/(.*)$': '<rootDir>/$1',
         '^@/api/(.*)$': '<rootDir>/api/$1',
         '^@/components/(.*)$': '<rootDir>/components/$1',
-        '^@/functions/(.*)$': '<rootDir>/functions/$1',
+        '^@/tools/(.*)$': '<rootDir>/tools/$1',
         '^@/public/(.*)$': '<rootDir>/public/$1',
         '^@/styles/(.*)$': '<rootDir>/styles/$1'
     },

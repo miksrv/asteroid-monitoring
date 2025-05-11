@@ -117,7 +117,7 @@ export const Spacemap: React.FC<AsteroidProps> = ({ asteroidName, orbitalData })
             viz.createLight([0, 0, 0])
             viz.createAmbientLight()
 
-            viz.zoomToFit(asteroid, 0.1)
+            void viz.zoomToFit(asteroid, 0.1)
 
             viz.getViewer().followObject(asteroid, [-0.01, -0.01, 0.01])
         }

@@ -14,7 +14,7 @@ export const Detailed: React.FC<DetailedProps> = ({ asteroidId, clientHeight = 2
 
     useEffect(() => {
         if (asteroidId) {
-            getAsteroidData(asteroidId)
+            void getAsteroidData(asteroidId)
         }
     }, [asteroidId])
 

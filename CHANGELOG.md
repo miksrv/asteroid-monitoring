@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.4
+
+### Patch Changes
+
+- Upgraded UI Libraries
+- Update main theme.css
+- Created new config for ESLint and Prettier
+- Fixed config for Jest
+- Fixed code-style by ESLint and Prettier
+- Delete `install-state.gz` from repository
+
 ## 1.1.3
 
 ### Patch Changes

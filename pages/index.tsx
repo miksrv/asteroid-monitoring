@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
+import { Dialog } from 'simple-react-ui-kit'
+
 import { NextPage } from 'next'
 // import { useTranslation } from 'next-i18next'
 import { NextSeo } from 'next-seo'
-import { Dialog } from 'simple-react-ui-kit'
 
 import API from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
@@ -64,7 +65,7 @@ const HomePage: NextPage = () => {
             localStorage === '{}' ||
             (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate])
         ) {
-            getAsteroidsList(currentDate)
+            void getAsteroidsList(currentDate)
         }
     }, [asteroidsData, asteroidsData, currentDate])
 

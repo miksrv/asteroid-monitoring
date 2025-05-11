@@ -1,8 +1,7 @@
 import { createWrapper } from 'next-redux-wrapper'
+import { configureStore } from '@reduxjs/toolkit'
 
 import { API } from './api'
-
-import { configureStore } from '@reduxjs/toolkit'
 
 export const store = () =>
     configureStore({

@@ -1,6 +1,7 @@
 <a id="top"></a>
 
 <!-- PROJECT TITLE -->
+
 A web application for real-time tracking of near-Earth objects using NASA's NeoWS (Near-Earth Object Web Service) API. Built with Next.js, TypeScript, and Redux.
 
 <div align="center">
@@ -11,6 +12,7 @@ A web application for real-time tracking of near-Earth objects using NASA's NeoW
 <a href="https://https://asteroid.miksoft.pro/" target="_blank">Demo</a>
 ·
 <a href="#contact">Contact</a>
+
 </div>
 
 <br />
@@ -34,6 +36,7 @@ A web application for real-time tracking of near-Earth objects using NASA's NeoW
 ---
 
 <!-- TABLE OF CONTENTS -->
+
 ### Table of Contents
 
 - [About of Project](#about-of-project)
@@ -47,6 +50,7 @@ A web application for real-time tracking of near-Earth objects using NASA's NeoW
 - [Contact](#contact)
 
 <!-- ABOUT OF PROJECT -->
+
 ## About of Project
 
 Asteroid Monitoring is a system that fetches and displays real-time data about asteroids approaching Earth using the NASA NeoWS API. The application provides detailed information on each object, including:
@@ -64,6 +68,7 @@ If an asteroid's trajectory intersects Earth's orbit, it is flagged as potential
 The app shows data for the current day (e.g., April 9, 2025) and is intended to raise awareness about the dynamic nature of our Solar System and the importance of planetary defense initiatives.
 
 ### Key Features:
+
 - 🌍 Fetches daily data from NASA NeoWS API
 - 📋 Displays a list of asteroids approaching Earth today
 - ⏱️ Shows approach time, distance, velocity, and size
@@ -93,6 +98,7 @@ The system is highly customizable, and additional sensors can be integrated to e
 </p>
 
 <!-- INSTALLATION -->
+
 ## Installation
 
 Follow these steps to install and run the Asteroid Monitoring project on your local machine.
@@ -100,6 +106,7 @@ Follow these steps to install and run the Asteroid Monitoring project on your lo
 ### Prerequisites
 
 Make sure you have the following installed on your system:
+
 - **Node.js** (v20 or higher)
 - **NPM** or **Yarn** (for frontend dependencies)
 
@@ -112,26 +119,26 @@ cd asteroid-monitoring
 
 2. Install dependencies:
 
-   ```bash
-   yarn install
-   ```
+    ```bash
+    yarn install
+    ```
 
 3. Generate your API key to access the NASA NeoWS API. Go to [NASA API](https://api.nasa.gov/) and get your key via email.
 
-
 4. Create a `.env` file in the root directory of the project and add your API key:
 
-   ```bash
-   NEXT_PUBLIC_API_KEY=your_api_key_here
-   ```
+    ```bash
+    NEXT_PUBLIC_API_KEY=your_api_key_here
+    ```
 
 5. Run the frontend in development mode:
 
-   ```bash
-   yarn run dev
-   ```
+    ```bash
+    yarn run dev
+    ```
 
 <!-- LIVE DEMO -->
+
 ## Live Demo
 
 Explore the fully functioning asteroid monitoring web application at:
@@ -142,6 +149,7 @@ Explore the fully functioning asteroid monitoring web application at:
 </p>
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open-source community an incredible environment for learning, inspiration, and innovation. Your contributions are highly valued and greatly appreciated, whether it’s reporting bugs, suggesting improvements, or creating new features.
@@ -150,26 +158,27 @@ Contributions are what make the open-source community an incredible environment 
 
 1. Fork the project by clicking the "Fork" button at the top of this page.
 2. Clone your fork locally:
-   ```bash
-   git clone https://github.com/miksrv/asteroid-monitoring.git
-   ```
+    ```bash
+    git clone https://github.com/miksrv/asteroid-monitoring.git
+    ```
 3. Create a new feature branch:
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
+    ```bash
+    git checkout -b feature/AmazingFeature
+    ```
 4. Make your changes, then commit them:
-   ```bash
-   git commit -m "Add AmazingFeature"
-   ```
+    ```bash
+    git commit -m "Add AmazingFeature"
+    ```
 5. Push your changes to your forked repository:
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
+    ```bash
+    git push origin feature/AmazingFeature
+    ```
 6. Open a pull request from your feature branch to the main repository.
 
 We encourage contributions of all kinds, whether big or small. Your efforts help improve the project for everyone!
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
@@ -179,6 +188,7 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 </p>
 
 <!-- CONTACT -->
+
 ## Contact
 
 Misha - [miksoft.pro](https://miksoft.pro)
@@ -188,6 +198,7 @@ Misha - [miksoft.pro](https://miksoft.pro)
 </p>
 
 <!-- MARKDOWN VARIABLES (LINKS, IMAGES) -->
+
 [contributors-badge]: https://img.shields.io/github/contributors/miksrv/asteroid-monitoring.svg?style=for-the-badge
 [contributors-url]: https://github.com/miksrv/asteroid-monitoring/graphs/contributors
 [forks-badge]: https://img.shields.io/github/forks/miksrv/asteroid-monitoring.svg?style=for-the-badge
@@ -200,6 +211,7 @@ Misha - [miksoft.pro](https://miksoft.pro)
 [license-url]: https://github.com/miksrv/asteroid-monitoring/blob/master/LICENSE.txt
 
 <!-- Other ready-made icons can be seen for example here: https://github.com/inttter/md-badges -->
+
 [js-badge]: https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000
 [js-url]: https://www.javascript.com/
 [ts-badge]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff

@@ -1,9 +1,9 @@
 import { HYDRATE } from 'next-redux-wrapper'
+import type { Action, PayloadAction } from '@reduxjs/toolkit'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { RootState } from '@/api/store'
 import { ApiNasaResponse, AsteroidData } from '@/api/types'
-import type { Action, PayloadAction } from '@reduxjs/toolkit'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const isHydrateAction = (action: Action): action is PayloadAction<RootState> => action.type === HYDRATE
 
@@ -21,6 +21,7 @@ export const API = createApi({
             query: (id) => `neo/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
         })
     }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extractRehydrationInfo(action, { reducerPath }): any {
         if (isHydrateAction(action)) {
             return action.payload[reducerPath]
