@@ -1,4 +1,11 @@
-# Changelog
+# CHANGELOG
+
+## 1.1.5
+
+### Patch Changes
+
+- Fixed dialog header height
+- Upgraded UI Libraries
 
 ## 1.1.4
 
