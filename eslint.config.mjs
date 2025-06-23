@@ -392,7 +392,6 @@ export default defineConfig([
             'next/no-head-import-in-document': 'error',
             // ✅ Disallow <Script> component in <Head>
             'next/no-script-component-in-head': 'error',
-
         },
     },
 ])
