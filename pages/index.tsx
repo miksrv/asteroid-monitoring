@@ -93,7 +93,9 @@ const HomePage: NextPage = () => {
                     locale: 'ru'
                 }}
             />
+
             <Header />
+
             <div className={'wrapper'}>
                 <p>
                     Система мониторинга астероидов использует API сервиса NASA (NeoWS) для отслеживания сближающихся с
