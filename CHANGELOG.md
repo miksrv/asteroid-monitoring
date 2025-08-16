@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.6
+
+### Patch Changes
+
+- Upgraded Dependencies
+
 ## 1.1.5
 
 ### Patch Changes
