@@ -101,6 +101,6 @@ jobs:
               run: |
                   lftp -c "
                     open ${{ secrets.FTP_HOSTNAME }};
-                    cls -1 | while read entry; do rm -r \"/$entry\" || true; done
+                    glob -a mrm *
                     mirror --parallel=100 -R out/ /
                   "
