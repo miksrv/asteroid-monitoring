@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.1.7
+
+### Patch Changes
+
+- Upgraded Node.js version to 22
+- Upgraded Dependencies
+- Upgraded Next.js to 16
+
 ## 1.1.6
 
 ### Patch Changes
