@@ -15,7 +15,7 @@
     ],
     "author": "Misha Topchilo <20854498+miksrv@users.noreply.github.com>",
     "license": "MIT",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
