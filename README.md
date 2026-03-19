@@ -5,7 +5,7 @@
 A web application for real-time tracking of near-Earth objects using NASA's NeoWS (Near-Earth Object Web Service) API. Built with Next.js, TypeScript, and Redux.
 
 <div align="center">
-  <img src="https://miksoft.pro/_next/static/media/asteroid.60cc340b.jpg" alt="Asteroid Monitoring" width="150" height="150">
+  <img src="https://miksoft.pro/images/asteroid.webp" alt="Asteroid Monitoring" width="150" height="150">
 
 <h3>Asteroid Monitoring</h3>
 
