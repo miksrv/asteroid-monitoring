@@ -24,12 +24,14 @@ Requires `NEXT_PUBLIC_API_KEY` in `.env` — a NASA NeoWS API key.
 **Next.js static site** (`output: 'export'` in `next.config.js`) — no server, deploys as static HTML via FTP.
 
 **Data flow:**
+
 1. `pages/index.tsx` triggers NASA NeoWS API call via RTK Query
 2. Response cached in `localStorage` to minimize API calls
 3. Redux store (RTK Query) provides data to components
 4. `next-redux-wrapper` handles SSG state hydration
 
 **Key layers:**
+
 - `api/api.ts` — RTK Query endpoints (`getAsteroidsList`, `getAsteroidData`)
 - `api/types.ts` — TypeScript interfaces for NASA API responses
 - `api/store.ts` — Redux store with RTK Query middleware
