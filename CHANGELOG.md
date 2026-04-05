@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.1.8
+
+### Patch Changes
+
+- Added CLAUDE.md with project usage, architecture, tooling, and environment notes for Claude Code
+- Updated `tsconfig.json`: changed `moduleResolution` from `node` to `bundler`
+- Upgraded Next.js to 16.2.2
+- Upgraded React and React DOM to 19.2.4
+- Upgraded `@reduxjs/toolkit` to 2.11.2
+- Upgraded `simple-react-ui-kit` to 1.7.12
+- Upgraded `i18next` to 25.10.10
+- Upgraded `react-i18next` to 16.6.6
+- Upgraded `dayjs` to 1.11.20
+- Upgraded `sass` to 1.99.0
+- Upgraded `next-i18next` to 15.4.3
+- Upgraded ESLint, TypeScript-ESLint, Prettier, Jest and related dev dependencies
+
 ## 1.1.7
 
 ### Patch Changes
