@@ -18,28 +18,6 @@ Document this limitation in the README. Consider adding retry logic in `fetchBas
 
 ---
 
-## [9] `Detailed` component — missing API error state
-
-**Priority:** High
-**Category:** Bug / Improvement
-**Files:** `components/Detailed/Detailed.tsx`
-
-**Description:**
-`Detailed.tsx` uses `useGetAsteroidDataQuery`, but only destructures `data` and `isLoading`. The `isError` state is ignored. If the API returns 404 or 500, the user will see an infinite skeleton with no indication of what went wrong.
-
-**Recommendation:**
-
-```tsx
-const { data: asteroidData, isLoading: asteroidLoading, isError } = API.useGetAsteroidDataQuery(asteroidId!, {
-    skip: !asteroidId
-})
-
-// In JSX:
-if (isError) return <div>Failed to load asteroid data</div>
-```
-
----
-
 ## [11] `useLocalStorage` — `window` not guarded against SSR (Next.js SSG)
 
 **Priority:** High
@@ -127,24 +105,6 @@ Either remove `next-i18next` entirely and keep using `react-i18next` with a plai
 
 ```yaml
 node-version-file: '.nvmrc'
-```
-
----
-
-## [18] Inline styles in `Detailed.tsx` and `Spacemap.tsx`
-
-**Priority:** Medium
-**Category:** Code Style
-**Files:** `components/Detailed/Detailed.tsx`, `components/Spacemap/Spacemap.tsx`
-
-**Description:**
-`Detailed.tsx` uses an inline style `style={{ height: \`${clientHeight - 200}px\` }}`. `Spacemap.tsx`uses`style={{ width: '100%', height: '100%', minHeight: '500px' }}`. The project uses CSS Modules (`.module.sass`), and inline styles violate the consistent styling approach. The magic number `200` is also undocumented.
-
-**Recommendation:**
-Create `styles.module.sass` for `Detailed` and `Spacemap` and move styles there. For dynamic height, use a CSS custom property:
-
-```tsx
-<div className={styles.container} style={{ '--dialog-height': `${clientHeight - 200}px` } as React.CSSProperties}>
 ```
 
 ---
@@ -396,4 +356,3 @@ The ESLint rule `react/jsx-max-depth: ['warn', { max: 4 }]` is likely violated i
 Extract the asteroid list and loading block into separate components (`AsteroidList`, `LoadingState`).
 
 ---
-

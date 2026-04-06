@@ -6,8 +6,8 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { wrapper } from '@/api/store'
-import i18n from '@/i18n/config'
 import ErrorBoundary from '@/components/ErrorBoundary'
+import i18n from '@/i18n/config'
 
 import '../styles/globals.sass'
 

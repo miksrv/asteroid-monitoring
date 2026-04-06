@@ -87,9 +87,17 @@ describe('Detailed', () => {
     })
 
     it('renders Skeleton when isLoading is true', () => {
-        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: true })
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: true, isError: false })
         render(<Detailed asteroidId={3542519} />)
         expect(screen.getByTestId('skeleton')).toBeInTheDocument()
+    })
+
+    it('renders error message when isError is true', () => {
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: false, isError: true })
+        render(<Detailed asteroidId={3542519} />)
+        expect(screen.getByText('Failed to load asteroid data')).toBeInTheDocument()
+        expect(screen.queryByTestId('skeleton')).toBeNull()
+        expect(screen.queryByTestId('spacemap-mock')).toBeNull()
     })
 
     it('renders Spacemap when asteroidData with orbital_data is available', () => {
