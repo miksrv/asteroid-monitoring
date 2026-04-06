@@ -3,14 +3,13 @@ import type { Config } from '@jest/types'
 const config: Config.InitialOptions = {
     collectCoverage: true,
     collectCoverageFrom: [
-        '**/*.{js,jsx,ts,tsx}',
+        'components/**/*.{ts,tsx}',
+        'tools/**/*.{ts,tsx}',
+        'api/**/*.{ts,tsx}',
         '!**/*.d.ts',
-        '!**/node_modules/**',
-        '!<rootDir>/out/**',
-        '!<rootDir>/.next/**',
-        '!<rootDir>/*.config.js',
-        '!<rootDir>/coverage/**'
+        '!**/index.ts'
     ],
+    coverageReporters: ['lcov', 'clover', 'text', 'text-summary'],
     // on node 14.x coverage provider v8 offers good speed and more or less good report
     coverageProvider: 'v8',
     globals: {
@@ -24,6 +23,12 @@ const config: Config.InitialOptions = {
         // Handle CSS imports (with CSS modules)
         // https://jestjs.io/docs/webpack#mocking-css-modules
         '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+
+        // Mock next/image to avoid static import issues in Jest
+        '^next/image$': '<rootDir>/__mocks__/next/image.tsx',
+
+        // Mock simple-react-ui-kit (ESM package, not transpiled by default)
+        '^simple-react-ui-kit$': '<rootDir>/__mocks__/simple-react-ui-kit.tsx',
 
         // Handle module aliases
         '^@/(.*)$': '<rootDir>/$1',
