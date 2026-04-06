@@ -6,9 +6,9 @@
 
 - Refactored useLocalStorage hook to use a typed generic API; eliminated double JSON serialization by storing parsed values directly in state; exposed a setValue that updates both state and localStorage atomically; added typeof window === 'undefined' SSR guards to prevent crashes during Next.js static generation.
 - Replaced getAsteroidsList and getAsteroidData RTK endpoints from builder.mutation to builder.query, enabling RTK Query caching, deduplication, and skip behavior; updated all call sites in pages/index.tsx and components/Detailed/Detailed.tsx.
-- Added React ErrorBoundary class component; wrapped Spacemap in Detailed.tsx to catch spacekit.js rendering errors, and wrapped the root app in _app.tsx as a top-level safety net.
+- Added React ErrorBoundary class component; wrapped Spacemap in Detailed.tsx to catch spacekit.js rendering errors, and wrapped the root app in \_app.tsx as a top-level safety net.
 - Added isError handling in the Detailed component; replaced the infinite skeleton on API failure with a user-facing error message.
-- Added pages/_document.tsx to set html lang="ru" for improved accessibility and SEO; added canonical URL and openGraph.url to NextSeo in pages/index.tsx.
+- Added pages/\_document.tsx to set html lang="ru" for improved accessibility and SEO; added canonical URL and openGraph.url to NextSeo in pages/index.tsx.
 - Fixed OrbitingBody enum to use string value 'Earth' instead of numeric 0, matching the NASA API response; added endpoint comments to api/types.ts documenting the intentional difference between number (feed endpoint) and string (detail endpoint) velocity and distance fields.
 - Replaced external favicon URL in Footer.tsx with local /favicon.ico; removed empty title attributes from footer links.
 - Added .env.example documenting the required NEXT_PUBLIC_API_KEY environment variable.
@@ -23,7 +23,7 @@
 - fix: replaced document.getElementById with useRef in Spacemap; added useEffect cleanup that sets container.innerHTML = '' on unmount, releasing the WebGL context that spacekit.js previously left alive.
 - fix: corrected typos on the index page — "Пожалуста" → "Пожалуйста", "астеродиы" → "астероиды", "актуальнные" → "актуальные".
 - fix: removed duplicated asteroidsData entry from the useEffect dependency array in pages/index.tsx.
-- tests: migrated all tests from a centralised __tests__/ directory to sit next to their source files. Added 106+ unit tests across all components (Asteroid, Countdown, Counter, Detailed, Footer, Header, Spacemap), utilities (date, helpers, useLocalStorage), and the API layer (api, store).
+- tests: migrated all tests from a centralised **tests**/ directory to sit next to their source files. Added 106+ unit tests across all components (Asteroid, Countdown, Counter, Detailed, Footer, Header, Spacemap), utilities (date, helpers, useLocalStorage), and the API layer (api, store).
 - ci: updated sonarcloud.yml and checks.yml to run tests and upload lcov coverage before the scan. Configured jest.config.ts with coverageReporters lcov/clover/text/text-summary and updated sonar-project.properties with correct source/test paths.
 - ci: GitHub Actions workflows now use node-version-file .nvmrc to match the local development environment (Node.js 20.11.0).
 - docs: added ROADMAP.md with 34 prioritised tasks (Critical to Low) covering bugs, performance, accessibility, security, and DevOps improvements found during a full codebase audit.
