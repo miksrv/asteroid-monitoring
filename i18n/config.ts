@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import en from '@/public/locales/en/common.json'
 import ru from '@/public/locales/ru/common.json'
+import { setDayjsLocale } from '@/tools/date'
 
 void i18n
     .use(LanguageDetector)
@@ -25,5 +26,10 @@ void i18n
             escapeValue: false
         }
     })
+    .then(() => {
+        setDayjsLocale(i18n.language)
+    })
+
+i18n.on('languageChanged', setDayjsLocale)
 
 export default i18n

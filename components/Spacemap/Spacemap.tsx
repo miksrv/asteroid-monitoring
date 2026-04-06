@@ -17,7 +17,7 @@ export const Spacemap: React.FC<AsteroidProps> = ({ asteroidName, orbitalData })
             return
         }
 
-        const viz = new Spacekit.Simulation(container, {
+        const viz = new Spacekit.Simulation(container as HTMLCanvasElement, {
             basePath: 'https://typpo.github.io/spacekit/src',
             startDate: new Date(),
             unitsPerAu: 10.0,
