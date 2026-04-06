@@ -1,10 +1,12 @@
 import React from 'react'
+import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { wrapper } from '@/api/store'
+import i18n from '@/i18n/config'
 
 import '../styles/globals.sass'
 
@@ -57,11 +59,13 @@ const App = ({ Component, pageProps }: AppProps) => {
                     href={'/site.webmanifest'}
                 />
             </Head>
-            <Provider store={store}>
-                <main>
-                    <Component {...props.pageProps} />
-                </main>
-            </Provider>
+            <I18nextProvider i18n={i18n}>
+                <Provider store={store}>
+                    <main>
+                        <Component {...props.pageProps} />
+                    </main>
+                </Provider>
+            </I18nextProvider>
 
             {process.env.NODE_ENV === 'production' && (
                 <div

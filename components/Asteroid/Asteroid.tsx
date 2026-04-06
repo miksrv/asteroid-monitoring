@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, cn } from 'simple-react-ui-kit'
 
 import { AsteroidListData } from '@/api/types'
@@ -16,6 +17,8 @@ type AsteroidProps = {
 }
 
 export const Asteroid: React.FC<AsteroidProps> = ({ data, maxDiameter, minDiameter, onClick }) => {
+    const { t } = useTranslation()
+
     const asteroidEstimatedSize = Math.round(
         ((data.estimated_diameter?.meters?.estimated_diameter_max || 0) +
             (data.estimated_diameter?.meters?.estimated_diameter_min || 0)) /
@@ -41,7 +44,7 @@ export const Asteroid: React.FC<AsteroidProps> = ({ data, maxDiameter, minDiamet
             <div>
                 <h2 className={styles.title}>{data.name?.match(/\(([^)]+)\)/)?.[1] || ''}</h2>
                 <div className={styles.dataBlock}>
-                    <div className={styles.label}>{'Дата сближения'}</div>
+                    <div className={styles.label}>{t('asteroid.approachDate')}</div>
                     <div className={styles.text}>
                         <span className={styles.dateDay}>{formatDate(approachDate, 'D MMM YYYY')}</span>
                         <span className={styles.dateTime}>{formatDate(approachDate, 'HH:mm:ss')}</span>
@@ -49,30 +52,30 @@ export const Asteroid: React.FC<AsteroidProps> = ({ data, maxDiameter, minDiamet
                 </div>
 
                 <div className={styles.dataBlock}>
-                    <div className={styles.label}>{'Расстояние'}</div>
+                    <div className={styles.label}>{t('asteroid.distance')}</div>
                     <div className={styles.text}>
                         <span className={styles.distanceValue}>{formatDistance(asteroidDistance)}</span>
-                        <span className={styles.distanceUnit}>{'км'}</span>
+                        <span className={styles.distanceUnit}>{t('asteroid.km')}</span>
                     </div>
                 </div>
             </div>
 
             <div>
                 {data.is_potentially_hazardous_asteroid ? (
-                    <div className={styles.dangerous}>{'Опасный'}</div>
+                    <div className={styles.dangerous}>{t('asteroid.dangerous')}</div>
                 ) : (
-                    <div className={styles.notDangerous}>{'Безопасен'}</div>
+                    <div className={styles.notDangerous}>{t('asteroid.safe')}</div>
                 )}
                 <div className={styles.dataBlock}>
-                    <div className={styles.label}>{'Скорость'}</div>
+                    <div className={styles.label}>{t('asteroid.speed')}</div>
                     <div className={styles.text}>
                         <span className={styles.dateDay}>{asteroidSpeed}</span>
-                        <span className={styles.dateTime}>{'км/сек'}</span>
+                        <span className={styles.dateTime}>{t('asteroid.kmPerSec')}</span>
                     </div>
                 </div>
 
                 <div className={styles.dataBlock}>
-                    <div className={styles.label}>{'Зв. величина'}</div>
+                    <div className={styles.label}>{t('asteroid.magnitude')}</div>
                     <div className={styles.text}>
                         <span className={styles.distanceValue}>
                             {data?.absolute_magnitude_h && data?.absolute_magnitude_h > 0 ? '+' : ''}
@@ -91,9 +94,9 @@ export const Asteroid: React.FC<AsteroidProps> = ({ data, maxDiameter, minDiamet
                 <div className={styles.rulerImage} />
                 <div className={styles.diameter}>
                     <span className={styles.value}>{asteroidEstimatedSize}</span>
-                    <span className={styles.unit}>{'м'}</span>
+                    <span className={styles.unit}>{t('asteroid.meters')}</span>
                 </div>
-                <div className={styles.estimated}>{'[примерно]'}</div>
+                <div className={styles.estimated}>{t('asteroid.estimated')}</div>
             </div>
 
             <div className={styles.countdownSection}>
@@ -108,24 +111,10 @@ export const Asteroid: React.FC<AsteroidProps> = ({ data, maxDiameter, minDiamet
                     stretched={true}
                     onClick={() => onClick?.(data.id)}
                 >
-                    {'Подробнее'}
+                    {t('asteroid.details')}
                 </Button>
             </div>
         </div>
-
-        //     {opened && (
-        //         {asteroidData && (
-        //                 <div className={styles.asteroidDetails}>
-        //             <h4>Детали астероида:</h4>
-        //             <p>ID: {asteroidData.id}</p>
-        //             <p>Название: {asteroidData.name}</p>
-        //             <p>Абсолютная величина: {asteroidData.absolute_magnitude_h}</p>
-        //             <p>Орбитальный период: {asteroidData.orbital_data.orbital_period} дней</p>
-        //             <p>Эксцентриситет: {asteroidData.orbital_data.eccentricity}</p>
-        //             <p>Полуось орбиты: {asteroidData.orbital_data.semi_major_axis} а.е.</p>
-        //             </div>
-        //         )}
-        //     )}
     )
 }
 
