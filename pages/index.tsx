@@ -17,7 +17,7 @@ import { formatDate } from '@/tools/date'
 import { useLocalStorage } from '@/tools/useLocalStorage'
 
 const HomePage: NextPage = () => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [asteroidId, setAsteroidId] = React.useState<number | undefined>()
 
@@ -83,7 +83,7 @@ const HomePage: NextPage = () => {
                             width: 2146
                         }
                     ],
-                    locale: 'ru',
+                    locale: i18n.language,
                     url: 'https://asteroid.miksoft.pro'
                 }}
             />

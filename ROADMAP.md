@@ -18,46 +18,6 @@ Document this limitation in the README. Consider adding retry logic in `fetchBas
 
 ---
 
-## [12] `OrbitingBody` enum has only `Earth = 0` and is not used correctly
-
-**Priority:** Medium
-**Category:** Bug / TypeScript
-**Files:** `api/types.ts`
-
-**Description:**
-
-```ts
-export enum OrbitingBody {
-    Earth
-}
-```
-
-`Earth` gets the numeric value `0` (numeric enum by default). In `AsteroidApproach` the field type is declared as `OrbitingBody | string`, making the enum useless. The NASA API returns the string `"Earth"`, not the number `0`. A numeric enum does not match a string value from the API.
-
-**Recommendation:**
-
-```ts
-export enum OrbitingBody {
-    Earth = 'Earth'
-}
-```
-
----
-
-## [13] Duplicated interfaces in `api/types.ts`
-
-**Priority:** Medium
-**Category:** Refactoring
-**Files:** `api/types.ts`
-
-**Description:**
-The file defines two sets of similar interfaces: `AsteroidApproach` (inside `AsteroidListData`) and `CloseApproachData` (inside `AsteroidData`). The `relative_velocity` fields have different types: `number` in `AsteroidApproach` vs. `string` in `RelativeVelocity`. Same for `miss_distance` — `number` in `AsteroidApproach` vs. `string` in `MissDistance`. This is because the NASA API returns strings for the detail object and numbers for the list, but duplicated interfaces without a comment are confusing.
-
-**Recommendation:**
-Add comments to each interface explaining which endpoint it corresponds to. Consider unifying with a generic type or union type.
-
----
-
 ## [15] `next-i18next` installed but unused — `react-i18next` used directly instead
 
 **Priority:** Medium
@@ -86,20 +46,6 @@ Either remove `next-i18next` entirely and keep using `react-i18next` with a plai
 ```yaml
 node-version-file: '.nvmrc'
 ```
-
----
-
-## [19] `alt=""` on images — accessibility issue
-
-**Priority:** Medium
-**Category:** Accessibility
-**Files:** `components/Footer/Footer.tsx`
-
-**Description:**
-In `Footer.tsx` the `<Image>` tag for the favicon has an empty `alt=""`, which is acceptable for decorative images, but the `<a>` wrapping it also has an empty `title=""`. The link is unidentifiable by screen readers. Additionally, the external image is loaded from `https://miksoft.pro/favicon.ico` — this is unreliable for a static site (the external resource may be unavailable).
-
-**Recommendation:**
-Add `aria-label` to the link. Replace the external favicon with a local file.
 
 ---
 
