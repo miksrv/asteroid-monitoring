@@ -1,1 +1,45 @@
-{}
+{
+    "asteroid": {
+        "approachDate": "Approach Date",
+        "distance": "Distance",
+        "speed": "Speed",
+        "magnitude": "Abs. Magnitude",
+        "dangerous": "Dangerous",
+        "safe": "Safe",
+        "km": "km",
+        "kmPerSec": "km/s",
+        "meters": "m",
+        "estimated": "[approx]",
+        "details": "Details"
+    },
+    "countdown": {
+        "title": "Countdown",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+    },
+    "counter": {
+        "found": "Asteroids found",
+        "dangerous": "Potentially dangerous"
+    },
+    "header": {
+        "title": "Asteroid Monitoring",
+        "imageAlt": "Asteroid"
+    },
+    "languageSwitcher": {
+        "ru": "RU",
+        "en": "EN"
+    },
+    "index": {
+        "seoTitle": "Asteroid Monitoring",
+        "seoDescription": "Asteroid monitoring system uses the NASA NeoWS API to track near-Earth objects.",
+        "description": "The asteroid monitoring system uses the NASA NeoWS API to track near-Earth objects. This service provides up-to-date data on all asteroids approaching Earth today, i.e.",
+        "descriptionSuffix": ". If an asteroid crosses Earth's orbit, it is considered a potentially hazardous asteroid that poses a threat to our planet. Currently the asteroid database contains approximately",
+        "descriptionCount": "33 thousand",
+        "descriptionEnd": "objects and this database grows every year.",
+        "loadingTitle": "Please wait",
+        "loadingSubtitle": "Searching for asteroids approaching Earth",
+        "orbitDialogTitle": "Asteroid orbit"
+    }
+}
