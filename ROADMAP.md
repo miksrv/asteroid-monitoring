@@ -4,37 +4,6 @@ Tasks are sorted by priority: Critical → High → Medium → Low.
 
 ---
 
-## [3] Duplicate dependency in useEffect in `pages/index.tsx`
-
-**Priority:** Critical
-**Category:** Bug
-**Files:** `pages/index.tsx`
-
-**Description:**
-The line `}, [asteroidsData, asteroidsData, currentDate])` lists `asteroidsData` twice in the dependency array. This is a typo that does not trigger an ESLint error (the `react-hooks/exhaustive-deps` rule is disabled), but it indicates carelessness in the code.
-
-**Recommendation:**
-
-```tsx
-}, [asteroidsData, currentDate])
-```
-
----
-
-## [4] `localStorage` mutation in RTK Query — potential cache desynchronization
-
-**Priority:** High
-**Category:** Bug / Refactoring
-**Files:** `pages/index.tsx`, `tools/useLocalStorage.ts`
-
-**Description:**
-The app uses `localStorage` as the primary data store and RTK Query `mutation` only for network requests. This creates two sources of truth: `asteroidData` from `useMemo(JSON.parse(localStorage))` and `data` from RTK Query. When the API returns new data, it is written to `localStorage` via `setLocalStorage(JSON.stringify(data))`, but `useLocalStorage` does not react to an external `setValue` call — `storedValue` is only updated through `setStoredValue`. Additionally, `useLocalStorage` never writes to `localStorage` on initial mount, and `storedValue` does not update when the `key` changes.
-
-**Recommendation:**
-Move to a single source of truth: store data in Redux state (RTK Query cache) and use `localStorage` only for persistence on initialization. Alternatively — keep the current approach but explicitly separate reads and writes, removing `JSON.stringify(data)` from `useEffect` and calling `setValue` directly.
-
----
-
 ## [5] Incorrect use of `builder.mutation` instead of `builder.query`
 
 **Priority:** High
