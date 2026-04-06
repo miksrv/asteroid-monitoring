@@ -4,6 +4,11 @@ export const useLocalStorage = <T>(key: string, initialValue?: T) => {
     const [storedValue, setStoredValue] = useState<T | undefined>()
 
     useEffect(() => {
+        /* c8 ignore next */
+        if (typeof window === 'undefined') {
+            return
+        }
+
         const value = window.localStorage.getItem(key)
 
         if (value) {
@@ -19,6 +24,11 @@ export const useLocalStorage = <T>(key: string, initialValue?: T) => {
     }, [key])
 
     const setValue = (value: T) => {
+        /* c8 ignore next */
+        if (typeof window === 'undefined') {
+            return
+        }
+
         setStoredValue(value)
         window.localStorage.setItem(key, JSON.stringify(value))
     }
