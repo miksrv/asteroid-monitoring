@@ -1,3 +1,6 @@
+// ─── /neo/rest/v1/feed endpoint ──────────────────────────────────────────────
+// Velocity and distance values are returned as numbers in the list response.
+
 export interface ApiNasaResponse {
     links?: {
         next: string
@@ -42,6 +45,7 @@ export interface AsteroidListData {
     is_sentry_object?: boolean
 }
 
+/** Close approach data as returned by the /feed endpoint — numeric velocity and distance. */
 export interface AsteroidApproach {
     close_approach_date?: string
     close_approach_date_full?: string
@@ -61,10 +65,11 @@ export interface AsteroidApproach {
 }
 
 export enum OrbitingBody {
-    Earth
+    Earth = 'Earth'
 }
 
-/// -------------/ NASA API RESPONSE -------------
+// ─── /neo/rest/v1/neo/:id endpoint ───────────────────────────────────────────
+// Velocity and distance values are returned as strings in the detail response.
 
 export interface NasaLinks {
     self: string
@@ -75,12 +80,14 @@ export interface EstimatedDiameter {
     estimated_diameter_max: number
 }
 
+/** Relative velocity as returned by the /neo/:id endpoint — string values. */
 export interface RelativeVelocity {
     kilometers_per_second: string
     kilometers_per_hour: string
     miles_per_hour: string
 }
 
+/** Miss distance as returned by the /neo/:id endpoint — string values. */
 export interface MissDistance {
     astronomical: string
     lunar: string
@@ -88,6 +95,7 @@ export interface MissDistance {
     miles: string
 }
 
+/** Close approach data as returned by the /neo/:id endpoint — string velocity and distance. */
 export interface CloseApproachData {
     close_approach_date: string
     close_approach_date_full: string

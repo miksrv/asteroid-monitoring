@@ -16,11 +16,10 @@ export const Footer: React.FC = () => (
             <a
                 href={'https://miksoft.pro'}
                 className={styles.link}
-                title={''}
             >
                 <Image
                     className={styles.copyrightImage}
-                    src={'https://miksoft.pro/favicon.ico'}
+                    src={'/favicon.ico'}
                     alt={''}
                     width={11}
                     height={11}
@@ -33,7 +32,6 @@ export const Footer: React.FC = () => (
                 href={'https://github.com/miksrv/asteroid-monitoring'}
                 rel={'nofollow noindex'}
                 className={styles.link}
-                title={''}
             >
                 {'GitHub'}
             </a>

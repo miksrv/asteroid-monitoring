@@ -2,14 +2,14 @@
 
 <!-- PROJECT TITLE -->
 
-A web application for real-time tracking of near-Earth objects using NASA's NeoWS (Near-Earth Object Web Service) API. Built with Next.js, TypeScript, and Redux.
-
 <div align="center">
   <img src="https://miksoft.pro/images/asteroid.webp" alt="Asteroid Monitoring" width="150" height="150">
 
 <h3>Asteroid Monitoring</h3>
 
-<a href="https://https://asteroid.miksoft.pro/" target="_blank">Demo</a>
+<p>A web application for real-time tracking of near-Earth objects using NASA's NeoWS API.</p>
+
+<a href="https://asteroid.miksoft.pro/" target="_blank">Live Demo</a>
 ·
 <a href="#contact">Contact</a>
 
@@ -39,7 +39,7 @@ A web application for real-time tracking of near-Earth objects using NASA's NeoW
 
 ### Table of Contents
 
-- [About of Project](#about-of-project)
+- [About the Project](#about-the-project)
     - [Key Features](#key-features)
     - [Built With](#built-with)
 - [Installation](#installation)
@@ -49,34 +49,34 @@ A web application for real-time tracking of near-Earth objects using NASA's NeoW
 - [Acknowledgments](#acknowledgments)
 - [Contact](#contact)
 
-<!-- ABOUT OF PROJECT -->
+<!-- ABOUT THE PROJECT -->
 
-## About of Project
+## About the Project
 
-Asteroid Monitoring is a system that fetches and displays real-time data about asteroids approaching Earth using the NASA NeoWS API. The application provides detailed information on each object, including:
+Asteroid Monitoring is a web application that fetches and visualizes real-time data about near-Earth objects (NEOs) using the [NASA NeoWS API](https://api.nasa.gov/). It displays all asteroids making a close approach to Earth on the current day, giving users an at-a-glance view of each object's key characteristics.
 
 ![Asteroid Monitoring Demo](public/images/demo.jpg)
 
-- Time of close approach
-- Distance from Earth
+For each asteroid the application shows:
+
+- Date and time of close approach
+- Miss distance from Earth
 - Relative velocity
-- Estimated size range
-- Orbit visualization
+- Estimated diameter range
+- Interactive 3D orbit visualization powered by spacekit.js
 
-If an asteroid's trajectory intersects Earth's orbit, it is flagged as potentially hazardous. The database currently includes over 33,000 near-Earth objects and is constantly growing as new discoveries are made.
+Asteroids whose trajectories bring them within a defined distance of Earth's orbit are flagged as **potentially hazardous**. NASA's database currently tracks over 33,000 near-Earth objects, and the count grows continuously as new discoveries are made.
 
-The app shows data for the current day (e.g., April 9, 2025) and is intended to raise awareness about the dynamic nature of our Solar System and the importance of planetary defense initiatives.
+### Key Features
 
-### Key Features:
-
-- 🌍 Fetches daily data from NASA NeoWS API
-- 📋 Displays a list of asteroids approaching Earth today
-- ⏱️ Shows approach time, distance, velocity, and size
-- 🛑 Flags potentially hazardous asteroids
-- 🛰️ Interactive orbit visualization for each object
-- ⚙️ Built with modern stack: Next.js, TypeScript, Redux
-
-The system is highly customizable, and additional sensors can be integrated to expand its functionality. This project demonstrates how microcontrollers, web development, and real-time data processing can be combined to create a fully functional, real-world application.
+- 🌍 Fetches daily near-Earth object data from the NASA NeoWS API
+- 📋 Lists all asteroids with a close approach scheduled for today
+- ⏱️ Shows approach time, miss distance, relative velocity, and estimated size
+- 🛑 Highlights potentially hazardous asteroids
+- 🛰️ Interactive 3D orbit visualization for each object
+- 🌐 Bilingual interface: Russian and English (auto-detected from browser locale)
+- ⚡ Offline-capable: API responses are cached in localStorage to minimize repeated requests
+- ⚙️ Statically exported — deploys as plain HTML with no server required
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -84,14 +84,13 @@ The system is highly customizable, and additional sensors can be integrated to e
 
 ### Built With
 
-- [![JavaScript][js-badge]][js-url] Core languages used in frontend development.
-- [![TypeScript][ts-badge]][ts-url] TypeScript extends JavaScript by adding types to the language.
-- [![NextJS][nextjs-badge]][nextjs-url] React-based frontend framework for building the user interface.
-- [![Redux][redux-badge]][redux-url] State management for the frontend, providing predictable and centralized state.
-- [![NodeJS][nodejs-badge]][nodejs-url] JavaScript runtime used for frontend development and package management.
-- [![Sass][sass-badge]][sass-url] Styling the user interface.
-- [![GitHub Actions][githubactions-badge]][githubactions-url] Continuous integration and deployment pipeline for automating tests and deployment processes.
-- [![SonarCloud][sonarcloud-badge]][sonarcloud-url] Code quality and security analysis.
+- [![TypeScript][ts-badge]][ts-url] Strongly typed JavaScript for safer, more maintainable code.
+- [![NextJS][nextjs-badge]][nextjs-url] React framework used for static site generation (`output: 'export'`).
+- [![Redux][redux-badge]][redux-url] RTK Query for data fetching, caching, and state management.
+- [![Sass][sass-badge]][sass-url] CSS Modules with Sass for component-scoped styling.
+- [![NodeJS][nodejs-badge]][nodejs-url] JavaScript runtime for development and package management.
+- [![GitHub Actions][githubactions-badge]][githubactions-url] CI/CD pipeline for automated linting, testing, and deployment.
+- [![SonarCloud][sonarcloud-badge]][sonarcloud-url] Continuous code quality and security analysis.
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -101,21 +100,21 @@ The system is highly customizable, and additional sensors can be integrated to e
 
 ## Installation
 
-Follow these steps to install and run the Asteroid Monitoring project on your local machine.
+Follow these steps to run Asteroid Monitoring locally.
 
 ### Prerequisites
 
-Make sure you have the following installed on your system:
+- **Node.js** v20.11.0 (see `.nvmrc`)
+- **Yarn** 4.x (`corepack enable && corepack prepare yarn@4.9.2 --activate`)
 
-- **Node.js** (v20 or higher)
-- **NPM** or **Yarn** (for frontend dependencies)
+### Steps
 
-1. Clone the repository
+1. Clone the repository:
 
-```bash
-git clone https://github.com/miksrv/asteroid-monitoring.git
-cd asteroid-monitoring
-```
+    ```bash
+    git clone https://github.com/miksrv/asteroid-monitoring.git
+    cd asteroid-monitoring
+    ```
 
 2. Install dependencies:
 
@@ -123,26 +122,42 @@ cd asteroid-monitoring
     yarn install
     ```
 
-3. Generate your API key to access the NASA NeoWS API. Go to [NASA API](https://api.nasa.gov/) and get your key via email.
+3. Obtain a free NASA API key at [api.nasa.gov](https://api.nasa.gov/).
 
-4. Create a `.env` file in the root directory of the project and add your API key:
-
-    ```bash
-    NEXT_PUBLIC_API_KEY=your_api_key_here
-    ```
-
-5. Run the frontend in development mode:
+4. Create a `.env` file in the project root:
 
     ```bash
-    yarn run dev
+    NEXT_PUBLIC_API_KEY=your_nasa_api_key_here
     ```
+
+5. Start the development server:
+
+    ```bash
+    yarn dev
+    ```
+
+    The app will be available at `http://localhost:3000`.
+
+### Available Scripts
+
+| Command               | Description                                |
+| --------------------- | ------------------------------------------ |
+| `yarn dev`            | Start development server                   |
+| `yarn build`          | Production build (static export to `/out`) |
+| `yarn test`           | Run unit tests with coverage               |
+| `yarn eslint:check`   | Check linting                              |
+| `yarn prettier:check` | Check formatting                           |
+
+<p align="right">
+  (<a href="#top">Back to top</a>)
+</p>
 
 <!-- LIVE DEMO -->
 
 ## Live Demo
 
-Explore the fully functioning asteroid monitoring web application at:
-🌐 [Live Demo](https://asteroid.miksoft.pro/)
+The production build is available at:
+🌐 **[asteroid.miksoft.pro](https://asteroid.miksoft.pro/)**
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -152,30 +167,34 @@ Explore the fully functioning asteroid monitoring web application at:
 
 ## Contributing
 
-Contributions are what make the open-source community an incredible environment for learning, inspiration, and innovation. Your contributions are highly valued and greatly appreciated, whether it’s reporting bugs, suggesting improvements, or creating new features.
+Contributions are welcome and greatly appreciated. Whether you are fixing a bug, improving documentation, or proposing a new feature — every contribution helps.
 
 **To contribute:**
 
-1. Fork the project by clicking the "Fork" button at the top of this page.
-2. Clone your fork locally:
+1. Fork the repository.
+2. Clone your fork:
     ```bash
     git clone https://github.com/miksrv/asteroid-monitoring.git
     ```
-3. Create a new feature branch:
+3. Create a feature branch:
     ```bash
-    git checkout -b feature/AmazingFeature
+    git checkout -b feature/your-feature-name
     ```
-4. Make your changes, then commit them:
+4. Commit your changes:
     ```bash
-    git commit -m "Add AmazingFeature"
+    git commit -m "Add your feature"
     ```
-5. Push your changes to your forked repository:
+5. Push to your fork:
     ```bash
-    git push origin feature/AmazingFeature
+    git push origin feature/your-feature-name
     ```
-6. Open a pull request from your feature branch to the main repository.
+6. Open a pull request against the `main` branch.
 
-We encourage contributions of all kinds, whether big or small. Your efforts help improve the project for everyone!
+Please make sure your changes pass linting (`yarn eslint:check`), formatting (`yarn prettier:check`), and tests (`yarn test`) before submitting.
+
+<p align="right">
+  (<a href="#top">Back to top</a>)
+</p>
 
 <!-- LICENSE -->
 
@@ -187,11 +206,23 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
   (<a href="#top">Back to top</a>)
 </p>
 
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+- [NASA NeoWS API](https://api.nasa.gov/) — near-Earth object data
+- [spacekit.js](https://typpo.github.io/spacekit/) — 3D solar system visualization library
+- [simple-react-ui-kit](https://github.com/miksrv/simple-react-ui-kit) — UI component library
+
+<p align="right">
+  (<a href="#top">Back to top</a>)
+</p>
+
 <!-- CONTACT -->
 
 ## Contact
 
-Misha - [miksoft.pro](https://miksoft.pro)
+Misha — [miksoft.pro](https://miksoft.pro)
 
 <p align="right">
   (<a href="#top">Back to top</a>)
@@ -208,7 +239,7 @@ Misha - [miksoft.pro](https://miksoft.pro)
 [issues-badge]: https://img.shields.io/github/issues/miksrv/asteroid-monitoring.svg?style=for-the-badge
 [issues-url]: https://github.com/miksrv/asteroid-monitoring/issues
 [license-badge]: https://img.shields.io/github/license/miksrv/asteroid-monitoring.svg?style=for-the-badge
-[license-url]: https://github.com/miksrv/asteroid-monitoring/blob/master/LICENSE.txt
+[license-url]: https://github.com/miksrv/asteroid-monitoring/blob/main/LICENSE
 
 <!-- Other ready-made icons can be seen for example here: https://github.com/inttter/md-badges -->
 

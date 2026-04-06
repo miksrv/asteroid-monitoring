@@ -17,20 +17,21 @@ import { formatDate } from '@/tools/date'
 import { useLocalStorage } from '@/tools/useLocalStorage'
 
 const HomePage: NextPage = () => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [asteroidId, setAsteroidId] = React.useState<number | undefined>()
 
     const currentDate = formatDate(new Date().toISOString(), 'YYYY-MM-DD')
-    const [localStorage, setLocalStorage] = useLocalStorage<string>('asteroids', '{}')
+    const [rawAsteroidsData, setAsteroidsData] = useLocalStorage<ApiNasaResponse>('asteroids', {} as ApiNasaResponse)
+    const asteroidsData = rawAsteroidsData ?? ({} as ApiNasaResponse)
     const [clientHeight, setClientHeight] = useState<number>(500)
 
-    const [getAsteroidsList, { data, isLoading }] = API.useGetAsteroidsListMutation()
+    const needsFetch =
+        rawAsteroidsData !== undefined &&
+        (Object.keys(asteroidsData).length === 0 ||
+            (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate]))
 
-    const asteroidsData: ApiNasaResponse = React.useMemo(
-        () => (localStorage ? JSON.parse(localStorage) : {}),
-        [localStorage]
-    )
+    const { data, isLoading } = API.useGetAsteroidsListQuery(currentDate, { skip: !needsFetch })
 
     const asteroidDiameters = asteroidsData.near_earth_objects?.[currentDate]
         ?.map((asteroid) => {
@@ -61,17 +62,8 @@ const HomePage: NextPage = () => {
     }, [])
 
     useEffect(() => {
-        if (
-            localStorage === '{}' ||
-            (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate])
-        ) {
-            void getAsteroidsList(currentDate)
-        }
-    }, [asteroidsData, currentDate])
-
-    useEffect(() => {
         if (data) {
-            setLocalStorage(JSON.stringify(data))
+            setAsteroidsData(data)
         }
     }, [data])
 
@@ -82,6 +74,7 @@ const HomePage: NextPage = () => {
             <NextSeo
                 title={t('index.seoTitle')}
                 description={t('index.seoDescription')}
+                canonical={'https://asteroid.miksoft.pro'}
                 openGraph={{
                     images: [
                         {
@@ -90,7 +83,8 @@ const HomePage: NextPage = () => {
                             width: 2146
                         }
                     ],
-                    locale: 'ru'
+                    locale: i18n.language,
+                    url: 'https://asteroid.miksoft.pro'
                 }}
             />
 
@@ -102,39 +96,40 @@ const HomePage: NextPage = () => {
                     {t('index.descriptionSuffix')} <b>{t('index.descriptionCount')}</b> {t('index.descriptionEnd')}
                 </p>
 
-                {isLoading || !asteroidsData || Object.keys(asteroidsData)?.length === 0 ? (
+                {isLoading || !asteroidsData?.near_earth_objects?.[currentDate] ? (
                     <div className={'loader'}>
                         <h2>{t('index.loadingTitle')}</h2>
                         <h4>{t('index.loadingSubtitle')}</h4>
                         <AsteroidLoadingSpinner />
                     </div>
                 ) : (
-                    <Counter
-                        total={asteroidsData?.element_count}
-                        dangerous={
-                            asteroidsData?.near_earth_objects?.[currentDate]?.filter(
-                                (asteroid) => asteroid.is_potentially_hazardous_asteroid
-                            )?.length
-                        }
-                    />
-                )}
+                    <>
+                        <Counter
+                            total={asteroidsData?.element_count}
+                            dangerous={
+                                asteroidsData?.near_earth_objects?.[currentDate]?.filter(
+                                    (asteroid) => asteroid.is_potentially_hazardous_asteroid
+                                )?.length
+                            }
+                        />
 
-                <div className={'asteroidList'}>
-                    {asteroidsData &&
-                        asteroidsData.near_earth_objects?.[currentDate]
-                            ?.sort(({ is_potentially_hazardous_asteroid }) =>
-                                is_potentially_hazardous_asteroid ? -1 : 1
-                            )
-                            .map((data) => (
-                                <Asteroid
-                                    key={data?.id}
-                                    data={data}
-                                    maxDiameter={Math.max(...(asteroidDiameters || []))}
-                                    minDiameter={Math.min(...(asteroidDiameters || []))}
-                                    onClick={(id) => setAsteroidId(!!id && id !== asteroidId ? id : undefined)}
-                                />
-                            ))}
-                </div>
+                        <div className={'asteroidList'}>
+                            {[...asteroidsData.near_earth_objects[currentDate]]
+                                .sort(({ is_potentially_hazardous_asteroid }) =>
+                                    is_potentially_hazardous_asteroid ? -1 : 1
+                                )
+                                .map((data) => (
+                                    <Asteroid
+                                        key={data?.id}
+                                        data={data}
+                                        maxDiameter={Math.max(...(asteroidDiameters || []))}
+                                        minDiameter={Math.min(...(asteroidDiameters || []))}
+                                        onClick={(id) => setAsteroidId(!!id && id !== asteroidId ? id : undefined)}
+                                    />
+                                ))}
+                        </div>
+                    </>
+                )}
 
                 <Dialog
                     open={!!asteroidId}

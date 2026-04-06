@@ -9,12 +9,12 @@ describe('API (RTK Query endpoints)', () => {
         expect(API.reducerPath).toBe('api')
     })
 
-    it('exports useGetAsteroidsListMutation hook', () => {
-        expect(typeof API.useGetAsteroidsListMutation).toBe('function')
+    it('exports useGetAsteroidsListQuery hook', () => {
+        expect(typeof API.useGetAsteroidsListQuery).toBe('function')
     })
 
-    it('exports useGetAsteroidDataMutation hook', () => {
-        expect(typeof API.useGetAsteroidDataMutation).toBe('function')
+    it('exports useGetAsteroidDataQuery hook', () => {
+        expect(typeof API.useGetAsteroidDataQuery).toBe('function')
     })
 
     it('has reducer defined', () => {
