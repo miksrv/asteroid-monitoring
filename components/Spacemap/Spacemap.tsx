@@ -33,6 +33,10 @@ export const Spacemap: React.FC<AsteroidProps> = ({ asteroidName, orbitalData })
         // Create a skybox using NASA TYCHO artwork.
         viz.createStars()
 
+        // Create light sources first (required for atmosphere rendering)
+        viz.createLight([0, 0, 0])
+        viz.createAmbientLight()
+
         // Create our first object - the sun - using a preset space object.
         viz.createObject('sun', Spacekit.SpaceObjectPresets.SUN)
 
@@ -117,12 +121,7 @@ export const Spacemap: React.FC<AsteroidProps> = ({ asteroidName, orbitalData })
 
         asteroid.initRotation()
         asteroid.startRotation()
-
-        viz.createLight([0, 0, 0])
-        viz.createAmbientLight()
-
         void viz.zoomToFit(asteroid, 0.1)
-
         viz.getViewer().followObject(asteroid, [-0.01, -0.01, 0.01])
 
         return () => {

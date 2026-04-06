@@ -14,11 +14,11 @@ export const API = createApi({
         baseUrl: API_URL
     }),
     endpoints: (builder) => ({
-        getAsteroidsList: builder.mutation<ApiNasaResponse, string>({
-            query: (date) => `feed?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${date}&end_date=${date}`
-        }),
-        getAsteroidData: builder.mutation<AsteroidData, number>({
+        getAsteroidData: builder.query<AsteroidData, number>({
             query: (id) => `neo/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        }),
+        getAsteroidsList: builder.query<ApiNasaResponse, string>({
+            query: (date) => `feed?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${date}&end_date=${date}`
         })
     }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

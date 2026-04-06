@@ -4,31 +4,6 @@ Tasks are sorted by priority: Critical → High → Medium → Low.
 
 ---
 
-## [5] Incorrect use of `builder.mutation` instead of `builder.query`
-
-**Priority:** High
-**Category:** Refactoring / RTK Query
-**Files:** `api/api.ts`
-
-**Description:**
-Both endpoints (`getAsteroidsList`, `getAsteroidData`) are defined as `mutation` even though they perform read-only GET requests. RTK Query `mutation` does not support automatic caching, request deduplication, `refetchOnMountOrArgChange`, and other features available in `query`. The current approach forfeits all RTK Query caching benefits.
-
-**Recommendation:**
-Redefine both endpoints as `builder.query`:
-
-```ts
-getAsteroidsList: builder.query<ApiNasaResponse, string>({
-    query: (date) => `feed?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${date}&end_date=${date}`
-}),
-getAsteroidData: builder.query<AsteroidData, number>({
-    query: (id) => `neo/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-})
-```
-
-Update call sites to use `useGetAsteroidsListQuery` / `useGetAsteroidDataQuery`.
-
----
-
 ## [6] API key passed in URL — potential secret exposure
 
 **Priority:** High

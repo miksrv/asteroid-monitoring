@@ -5,18 +5,12 @@ import { render, screen } from '@testing-library/react'
 import { AsteroidData } from '@/api/types'
 import { Detailed } from '@/components/Detailed/Detailed'
 
-const mockGetAsteroidData = jest.fn()
-
-// Default mock state — no data, not loading
-let mockMutationResult: { data: AsteroidData | undefined; isLoading: boolean } = {
-    data: undefined,
-    isLoading: false
-}
+const mockUseGetAsteroidDataQuery = jest.fn()
 
 jest.mock('@/api/api', () => ({
     __esModule: true,
     default: {
-        useGetAsteroidDataMutation: () => [mockGetAsteroidData, mockMutationResult]
+        useGetAsteroidDataQuery: (...args: unknown[]) => mockUseGetAsteroidDataQuery(...args)
     }
 }))
 
@@ -77,8 +71,7 @@ const mockAsteroidData: AsteroidData = {
 
 describe('Detailed', () => {
     beforeEach(() => {
-        mockGetAsteroidData.mockClear()
-        mockMutationResult = { data: undefined, isLoading: false }
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: false })
     })
 
     it('renders a container div', () => {
@@ -87,38 +80,38 @@ describe('Detailed', () => {
     })
 
     it('renders Skeleton when there is no data (no orbital_data)', () => {
-        mockMutationResult = { data: undefined, isLoading: false }
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: false })
         render(<Detailed asteroidId={3542519} />)
         expect(screen.getByTestId('skeleton')).toBeInTheDocument()
         expect(screen.queryByTestId('spacemap-mock')).toBeNull()
     })
 
     it('renders Skeleton when isLoading is true', () => {
-        mockMutationResult = { data: undefined, isLoading: true }
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: undefined, isLoading: true })
         render(<Detailed asteroidId={3542519} />)
         expect(screen.getByTestId('skeleton')).toBeInTheDocument()
     })
 
     it('renders Spacemap when asteroidData with orbital_data is available', () => {
-        mockMutationResult = { data: mockAsteroidData, isLoading: false }
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: mockAsteroidData, isLoading: false })
         render(<Detailed asteroidId={3542519} />)
         expect(screen.getByTestId('spacemap-mock')).toBeInTheDocument()
     })
 
     it('passes asteroidName to Spacemap', () => {
-        mockMutationResult = { data: mockAsteroidData, isLoading: false }
+        mockUseGetAsteroidDataQuery.mockReturnValue({ data: mockAsteroidData, isLoading: false })
         render(<Detailed asteroidId={3542519} />)
         expect(screen.getByText('2011 AG5')).toBeInTheDocument()
     })
 
-    it('calls getAsteroidData with asteroidId when asteroidId is provided', () => {
+    it('calls useGetAsteroidDataQuery with asteroidId when asteroidId is provided', () => {
         render(<Detailed asteroidId={3542519} />)
-        expect(mockGetAsteroidData).toHaveBeenCalledWith(3542519)
+        expect(mockUseGetAsteroidDataQuery).toHaveBeenCalledWith(3542519, expect.objectContaining({ skip: false }))
     })
 
-    it('does not call getAsteroidData when asteroidId is undefined', () => {
+    it('calls useGetAsteroidDataQuery with skip: true when asteroidId is undefined', () => {
         render(<Detailed />)
-        expect(mockGetAsteroidData).not.toHaveBeenCalled()
+        expect(mockUseGetAsteroidDataQuery).toHaveBeenCalledWith(undefined, expect.objectContaining({ skip: true }))
     })
 
     it('renders container with calculated height based on clientHeight prop', () => {

@@ -22,13 +22,16 @@ const HomePage: NextPage = () => {
     const [asteroidId, setAsteroidId] = React.useState<number | undefined>()
 
     const currentDate = formatDate(new Date().toISOString(), 'YYYY-MM-DD')
-    const [asteroidsData = {} as ApiNasaResponse, setAsteroidsData] = useLocalStorage<ApiNasaResponse>(
-        'asteroids',
-        {} as ApiNasaResponse
-    )
+    const [rawAsteroidsData, setAsteroidsData] = useLocalStorage<ApiNasaResponse>('asteroids', {} as ApiNasaResponse)
+    const asteroidsData = rawAsteroidsData ?? ({} as ApiNasaResponse)
     const [clientHeight, setClientHeight] = useState<number>(500)
 
-    const [getAsteroidsList, { data, isLoading }] = API.useGetAsteroidsListMutation()
+    const needsFetch =
+        rawAsteroidsData !== undefined &&
+        (Object.keys(asteroidsData).length === 0 ||
+            (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate]))
+
+    const { data, isLoading } = API.useGetAsteroidsListQuery(currentDate, { skip: !needsFetch })
 
     const asteroidDiameters = asteroidsData.near_earth_objects?.[currentDate]
         ?.map((asteroid) => {
@@ -57,15 +60,6 @@ const HomePage: NextPage = () => {
             window.removeEventListener('resize', updateClientHeight)
         }
     }, [])
-
-    useEffect(() => {
-        if (
-            Object.keys(asteroidsData).length === 0 ||
-            (!!asteroidsData?.near_earth_objects && !asteroidsData?.near_earth_objects?.[currentDate])
-        ) {
-            void getAsteroidsList(currentDate)
-        }
-    }, [asteroidsData, currentDate])
 
     useEffect(() => {
         if (data) {

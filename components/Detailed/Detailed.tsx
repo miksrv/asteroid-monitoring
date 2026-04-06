@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Skeleton } from 'simple-react-ui-kit'
 
 import API from '@/api/api'
@@ -10,13 +10,9 @@ type DetailedProps = {
 }
 
 export const Detailed: React.FC<DetailedProps> = ({ asteroidId, clientHeight = 200 }) => {
-    const [getAsteroidData, { data: asteroidData, isLoading: asteroidLoading }] = API.useGetAsteroidDataMutation()
-
-    useEffect(() => {
-        if (asteroidId) {
-            void getAsteroidData(asteroidId)
-        }
-    }, [asteroidId])
+    const { data: asteroidData, isLoading: asteroidLoading } = API.useGetAsteroidDataQuery(asteroidId!, {
+        skip: !asteroidId
+    })
 
     return (
         <div style={{ height: `${clientHeight - 200}px` }}>
