@@ -6,53 +6,15 @@ Tasks are sorted by priority: Critical → High → Medium → Low.
 
 ## [6] API key passed in URL — potential secret exposure
 
-**Priority:** High
-**Category:** Security
+**Priority:** Low
+**Category:** Security / Documentation
 **Files:** `api/api.ts`
 
 **Description:**
-`process.env.NEXT_PUBLIC_API_KEY` is embedded directly in the request URL inside `fetchBaseQuery`. This is standard practice for static sites, but the key is visible in browser network logs, in the HTML (since it is a public env var), and in browser history. There is no protection against rate limit exhaustion or key leakage.
+`process.env.NEXT_PUBLIC_API_KEY` is embedded directly in the request URL. The key is visible in browser network logs and in the HTML. NASA NeoWS API does not support `X-Api-Key` header (returns CORS error), so passing the key in the URL is the only option.
 
 **Recommendation:**
-Use `prepareHeaders` to pass the key as a header if the NASA API supports it. If not — document this risk in the README and add rate-limit handling (retry logic) in `fetchBaseQuery`.
-
----
-
-## [7] Typos in user interface text
-
-**Priority:** High
-**Category:** Bug
-**Files:** `pages/index.tsx`
-
-**Description:**
-The page text contains typos:
-
-- "Пожалуста" instead of "Пожалуйста"
-- "астеродиы" instead of "астероиды"
-- "актуальнные" instead of "актуальные"
-
-**Recommendation:**
-Fix the typos directly in JSX. After implementing i18n this issue will disappear on its own, but for now — fix in place.
-
----
-
-## [8] No Error Boundary in the application
-
-**Priority:** High
-**Category:** Bug / Improvement
-**Files:** `pages/_app.tsx`, `components/Spacemap/Spacemap.tsx`, `components/Detailed/Detailed.tsx`
-
-**Description:**
-The application has no React Error Boundary. If `spacekit.js` throws during initialization (invalid orbital data, WebGL issue), the entire page will crash with a blank screen. Similarly, any error in `Detailed` or `Asteroid` will break the whole app.
-
-**Recommendation:**
-Create an `ErrorBoundary` component and wrap at least `<Spacemap>` and the asteroid list:
-
-```tsx
-<ErrorBoundary fallback={<div>Failed to load map</div>}>
-    <Spacemap ... />
-</ErrorBoundary>
-```
+Document this limitation in the README. Consider adding retry logic in `fetchBaseQuery` for rate-limit (429) responses.
 
 ---
 
@@ -63,41 +25,17 @@ Create an `ErrorBoundary` component and wrap at least `<Spacemap>` and the aster
 **Files:** `components/Detailed/Detailed.tsx`
 
 **Description:**
-`Detailed.tsx` uses `useGetAsteroidDataMutation`, but only destructures `data` and `isLoading`. The `isError` and `error` states are ignored. If the API returns 404 or 500, the user will see an infinite skeleton with no indication of what went wrong.
+`Detailed.tsx` uses `useGetAsteroidDataQuery`, but only destructures `data` and `isLoading`. The `isError` state is ignored. If the API returns 404 or 500, the user will see an infinite skeleton with no indication of what went wrong.
 
 **Recommendation:**
 
 ```tsx
-const [getAsteroidData, { data, isLoading, isError }] = API.useGetAsteroidDataMutation()
+const { data: asteroidData, isLoading: asteroidLoading, isError } = API.useGetAsteroidDataQuery(asteroidId!, {
+    skip: !asteroidId
+})
 
 // In JSX:
 if (isError) return <div>Failed to load asteroid data</div>
-```
-
----
-
-## [10] Stale dependency in useEffect `getAsteroidData` — missing `asteroidId` in deps
-
-**Priority:** High
-**Category:** Bug
-**Files:** `components/Detailed/Detailed.tsx`
-
-**Description:**
-
-```tsx
-useEffect(() => {
-    if (asteroidId) {
-        void getAsteroidData(asteroidId)
-    }
-}, [asteroidId])
-```
-
-`getAsteroidData` is not included in the dependency array. Since `react-hooks/exhaustive-deps` is disabled in ESLint, this is not flagged. On every render `getAsteroidData` is a new function (from the mutation hook), but its absence from deps means a stale version may be called under certain conditions.
-
-**Recommendation:**
-
-```tsx
-}, [asteroidId, getAsteroidData])
 ```
 
 ---
@@ -162,70 +100,33 @@ Add comments to each interface explaining which endpoint it corresponds to. Cons
 
 ---
 
-## [14] Commented-out code — dead code in several files
+## [15] `next-i18next` installed but unused — `react-i18next` used directly instead
 
 **Priority:** Medium
 **Category:** Refactoring
-**Files:** `components/Asteroid/Asteroid.tsx` (lines 116–128), `pages/index.tsx` (lines 20–21), `.github/workflows/sonarcloud.yml` (lines 22–52), `.github/workflows/checks.yml` (lines 51–52)
+**Files:** `next-i18next.config.js`, `pages/index.tsx`, `package.json`
 
 **Description:**
-`Asteroid.tsx` has a large block of commented-out JSX (asteroid details). `pages/index.tsx` has `useTranslation` commented out. The CI workflows have the dependency installation and test-run steps commented out — meaning tests are not executed in CI.
+`next-i18next` is installed (`^15.4.3`) but not used. Components import `useTranslation` from `react-i18next` directly, bypassing the Next.js i18n layer. `appWithTranslation` does not wrap `_app.tsx`, `serverSideTranslations` is never called, and `next-i18next.config.js` has no effect.
 
 **Recommendation:**
-
-1. Remove the commented-out JSX in `Asteroid.tsx` or implement the functionality.
-2. Uncomment the test steps in CI after tests are written (Task 2).
-3. Uncomment `useTranslation` after populating locale files.
+Either remove `next-i18next` entirely and keep using `react-i18next` with a plain translation object, or fully integrate `next-i18next` (`appWithTranslation` in `_app.tsx`, `getStaticProps` with `serverSideTranslations` in pages). For static export (`output: 'export'`) use `getStaticProps`, not `getServerSideProps`.
 
 ---
 
-## [15] `next-i18next` is configured but effectively unused
-
-**Priority:** Medium
-**Category:** Refactoring
-**Files:** `next-i18next.config.js`, `pages/index.tsx`, all components
-
-**Description:**
-`next-i18next` is installed, configured with two locales (`ru`, `en`), but is not used in any component. `appWithTranslation` does not wrap `_app.tsx`. `serverSideTranslations` is not called on any page.
-
-**Recommendation:**
-Either fully integrate `next-i18next` (wrap `_app.tsx` with `appWithTranslation`, add `getStaticProps` with `serverSideTranslations`, use `useTranslation` in components), or remove the package and store translations in a plain constant object. For static export (`output: 'export'`) use `getStaticProps`, not `getServerSideProps`.
-
----
-
-## [16] `sonarcloud.yml` — tests are not run before uploading coverage
-
-**Priority:** Medium
-**Category:** DevOps / CI/CD
-**Files:** `.github/workflows/sonarcloud.yml`
-
-**Description:**
-The entire block for installing dependencies, running tests, and generating coverage is commented out. The SonarCloud scan runs without an up-to-date `coverage/lcov.info`, making coverage metrics in SonarCloud meaningless.
-
-**Recommendation:**
-Uncomment the CI steps, use Node.js 20 (per `.nvmrc`) instead of 22 (used in `checks.yml`), and ensure `yarn test` generates `coverage/lcov.info` before the SonarCloud scan step.
-
----
-
-## [17] `checks.yml` uses Node.js 22 instead of 20.11.0 from `.nvmrc`
+## [17] `deploy.yml` uses Node.js 22 instead of 20.11.0 from `.nvmrc`
 
 **Priority:** Medium
 **Category:** DevOps
-**Files:** `.github/workflows/checks.yml`, `.github/workflows/deploy.yml`
+**Files:** `.github/workflows/deploy.yml`
 
 **Description:**
-`.nvmrc` specifies version `20.11.0`, but both workflows (`checks.yml`, `deploy.yml`) use `node-version: 22`. This mismatch can lead to behavioral differences between local development and CI.
+`.nvmrc` specifies `20.11.0`. `checks.yml` and `sonarcloud.yml` already use `node-version-file: '.nvmrc'`, but `deploy.yml` still hardcodes `node-version: 22`. This mismatch can cause behavioral differences between CI checks and production deploys.
 
 **Recommendation:**
 
 ```yaml
 node-version-file: '.nvmrc'
-```
-
-Or explicitly:
-
-```yaml
-node-version: '20.11.0'
 ```
 
 ---
@@ -338,24 +239,6 @@ collectCoverageFrom: [
 
 ```ts
 coverageReporters: ['lcov', 'clover', 'text', 'text-summary']
-```
-
----
-
-## [24] Missing `setupTests.config.tsx` in the repository
-
-**Priority:** Medium
-**Category:** Testing
-**Files:** `jest.config.ts`
-
-**Description:**
-`jest.config.ts` references `setupFilesAfterEnv: ['<rootDir>/setupTests.config.tsx']`, but this file does not exist in the repository. If it is missing, Jest will fail on startup.
-
-**Recommendation:**
-Create `setupTests.config.tsx` with minimal content:
-
-```tsx
-import '@testing-library/jest-dom'
 ```
 
 ---
@@ -514,14 +397,3 @@ Extract the asteroid list and loading block into separate components (`AsteroidL
 
 ---
 
-## [34] No tests for the entire application
-
-**Priority:** Low (addressed by Task 2)
-**Category:** Testing
-**Files:** all components and utilities
-
-**Description:**
-The project has no tests at all. `jest.config.ts` is configured and dependencies are installed (`@testing-library/react`, `@types/jest`), but the `__tests__` folder does not exist. The CI workflow has the test-run step commented out.
-
-**Recommendation:**
-Write unit tests for all components and utilities (covered by Task 2 of this ROADMAP).

@@ -2,6 +2,7 @@ import React from 'react'
 import { Skeleton } from 'simple-react-ui-kit'
 
 import API from '@/api/api'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import Spacemap from '@/components/Spacemap'
 
 type DetailedProps = {
@@ -19,10 +20,12 @@ export const Detailed: React.FC<DetailedProps> = ({ asteroidId, clientHeight = 2
             {asteroidLoading || !asteroidData?.orbital_data ? (
                 <Skeleton style={{ width: '100%', height: '100%' }} />
             ) : (
-                <Spacemap
-                    asteroidName={asteroidData?.name}
-                    orbitalData={asteroidData?.orbital_data}
-                />
+                <ErrorBoundary fallback={<div>{'Failed to load 3D map'}</div>}>
+                    <Spacemap
+                        asteroidName={asteroidData?.name}
+                        orbitalData={asteroidData?.orbital_data}
+                    />
+                </ErrorBoundary>
             )}
         </div>
     )

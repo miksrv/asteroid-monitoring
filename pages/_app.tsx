@@ -7,6 +7,7 @@ import Head from 'next/head'
 
 import { wrapper } from '@/api/store'
 import i18n from '@/i18n/config'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 import '../styles/globals.sass'
 
@@ -61,9 +62,11 @@ const App = ({ Component, pageProps }: AppProps) => {
             </Head>
             <I18nextProvider i18n={i18n}>
                 <Provider store={store}>
-                    <main>
-                        <Component {...props.pageProps} />
-                    </main>
+                    <ErrorBoundary fallback={<main>{'Something went wrong. Please reload the page.'}</main>}>
+                        <main>
+                            <Component {...props.pageProps} />
+                        </main>
+                    </ErrorBoundary>
                 </Provider>
             </I18nextProvider>
 
