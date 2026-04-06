@@ -74,6 +74,7 @@ const HomePage: NextPage = () => {
             <NextSeo
                 title={t('index.seoTitle')}
                 description={t('index.seoDescription')}
+                canonical={'https://asteroid.miksoft.pro'}
                 openGraph={{
                     images: [
                         {
@@ -82,7 +83,8 @@ const HomePage: NextPage = () => {
                             width: 2146
                         }
                     ],
-                    locale: 'ru'
+                    locale: 'ru',
+                    url: 'https://asteroid.miksoft.pro'
                 }}
             />
 

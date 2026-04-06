@@ -223,24 +223,6 @@ import Script from 'next/script'
 
 ---
 
-## [27] SEO — missing `canonical` URL and `lang` attribute
-
-**Priority:** Medium
-**Category:** SEO
-**Files:** `pages/index.tsx`, `pages/_app.tsx`
-
-**Description:**
-`NextSeo` does not include a `canonical` URL. `<html lang="...">` is not set (no custom `_document.tsx`). Without the `lang` attribute, screen readers do not know the language of the content. Additionally, `openGraph.url` is not specified.
-
-**Recommendation:**
-Create `pages/_document.tsx` with `<Html lang="ru">`. Add `canonical` to `NextSeo`:
-
-```tsx
-<NextSeo canonical='https://asteroid.miksoft.pro' />
-```
-
----
-
 ## [28] Division by zero when `maxDiameter === minDiameter`
 
 **Priority:** Medium
