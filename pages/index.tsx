@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
 import { Dialog } from 'simple-react-ui-kit'
 
 import { NextPage } from 'next'
-// import { useTranslation } from 'next-i18next'
 import { NextSeo } from 'next-seo'
 
 import API from '@/api/api'
@@ -17,7 +17,7 @@ import { formatDate } from '@/tools/date'
 import { useLocalStorage } from '@/tools/useLocalStorage'
 
 const HomePage: NextPage = () => {
-    // const { t } = useTranslation()
+    const { t } = useTranslation()
 
     const [asteroidId, setAsteroidId] = React.useState<number | undefined>()
 
@@ -67,7 +67,7 @@ const HomePage: NextPage = () => {
         ) {
             void getAsteroidsList(currentDate)
         }
-    }, [asteroidsData, asteroidsData, currentDate])
+    }, [asteroidsData, currentDate])
 
     useEffect(() => {
         if (data) {
@@ -75,13 +75,13 @@ const HomePage: NextPage = () => {
         }
     }, [data])
 
+    const dialogTitle = `${t('index.orbitDialogTitle')} ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name ?? ''}`
+
     return (
         <>
             <NextSeo
-                title={'Мониторинг астероидов'}
-                description={
-                    'Система мониторинга астероидов использует API сервиса NASA (NeoWS) для отслеживания сближающихся с Землей объектов.'
-                }
+                title={t('index.seoTitle')}
+                description={t('index.seoDescription')}
                 openGraph={{
                     images: [
                         {
@@ -98,19 +98,14 @@ const HomePage: NextPage = () => {
 
             <div className={'wrapper'}>
                 <p>
-                    Система мониторинга астероидов использует API сервиса NASA (NeoWS) для отслеживания сближающихся с
-                    Землей объектов. Данный сервис предоставляет актуальнные данные по всем астероидам, которые
-                    сближаются с Землей сегодня, т.е.{' '}
-                    <span className={'date'}>{formatDate(currentDate, 'D MMMM YYYY')}</span>. Если астероид пересекает
-                    орбиту Земли, то он считается как потенциально опасный астероид, представляющий угрозу нашей
-                    планете. В настоящий момент в базе данных астероидов насчитывается порядка <b>33 тысяч</b> объектов
-                    и каждый год эта база расширяется.
+                    {t('index.description')} <span className={'date'}>{formatDate(currentDate, 'D MMMM YYYY')}</span>
+                    {t('index.descriptionSuffix')} <b>{t('index.descriptionCount')}</b> {t('index.descriptionEnd')}
                 </p>
 
                 {isLoading || !asteroidsData || Object.keys(asteroidsData)?.length === 0 ? (
                     <div className={'loader'}>
-                        <h2>{'Пожалуста, подождите'}</h2>
-                        <h4>{'Ищем приближающиеся к Земле астеродиы'}</h4>
+                        <h2>{t('index.loadingTitle')}</h2>
+                        <h4>{t('index.loadingSubtitle')}</h4>
                         <AsteroidLoadingSpinner />
                     </div>
                 ) : (
@@ -145,7 +140,7 @@ const HomePage: NextPage = () => {
                     open={!!asteroidId}
                     showCloseButton={true}
                     onCloseDialog={handleCloseDialog}
-                    title={`Орбита астероида ${asteroidsData.near_earth_objects?.[currentDate]?.find((item) => item.id === asteroidId)?.name}`}
+                    title={dialogTitle}
                     maxWidth={'90%'}
                 >
                     <Detailed

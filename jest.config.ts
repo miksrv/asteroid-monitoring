@@ -30,6 +30,10 @@ const config: Config.InitialOptions = {
         // Mock simple-react-ui-kit (ESM package, not transpiled by default)
         '^simple-react-ui-kit$': '<rootDir>/__mocks__/simple-react-ui-kit.tsx',
 
+        // Mock react-i18next and i18next-browser-languagedetector for Jest (jsdom environment)
+        '^react-i18next$': '<rootDir>/__mocks__/react-i18next.tsx',
+        '^i18next-browser-languagedetector$': '<rootDir>/__mocks__/i18next-browser-languagedetector.ts',
+
         // Handle module aliases
         '^@/(.*)$': '<rootDir>/$1',
         '^@/api/(.*)$': '<rootDir>/api/$1',

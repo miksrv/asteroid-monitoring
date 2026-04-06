@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const cn = (...classes: (string | undefined | null | false)[]) => classes.filter(Boolean).join(' ')
+export const cn = (...classes: Array<string | undefined | null | false>) => classes.filter(Boolean).join(' ')
 
 export const Button = ({
     children,

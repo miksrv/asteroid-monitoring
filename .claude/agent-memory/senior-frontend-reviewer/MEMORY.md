@@ -1,1 +1,2 @@
 - [Testing setup decisions](project_testing_setup.md) — ESM mock for simple-react-ui-kit, next/image mock, timezone-safe date test fix
+- [i18n architecture decision](project_i18n_setup.md) — pure react-i18next (not next-i18next), mock setup, test key convention, localStorage key
