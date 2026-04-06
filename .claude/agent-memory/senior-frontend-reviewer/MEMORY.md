@@ -1,0 +1,1 @@
+- [Testing setup decisions](project_testing_setup.md) — ESM mock for simple-react-ui-kit, next/image mock, timezone-safe date test fix
