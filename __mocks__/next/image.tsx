@@ -10,7 +10,7 @@ type ImageProps = {
 }
 
 const Image = ({ src, alt, width, height, className, style }: ImageProps) => {
-    const srcValue = typeof src === 'string' ? src : src?.src ?? ''
+    const srcValue = typeof src === 'string' ? src : (src?.src ?? '')
 
     return (
         <img
