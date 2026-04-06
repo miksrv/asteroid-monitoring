@@ -447,7 +447,6 @@ The Yandex Metrika script is injected via `dangerouslySetInnerHTML` inside the `
 
 ```tsx
 import Script from 'next/script'
-
 ;<Script
     id='yandex-metrika'
     strategy='afterInteractive'

@@ -11,6 +11,7 @@ The project uses pure `react-i18next` + `i18next-browser-languagedetector` inste
 **How to apply:** When adding new i18n features — always use `useTranslation()` from `react-i18next`, never from `next-i18next`. The `i18n/config.ts` initialises i18next as a side-effect import in `pages/_app.tsx`. The `I18nextProvider` wraps the Redux `Provider`.
 
 **Test key convention:** Because `__mocks__/react-i18next.tsx` returns the key as-is (`t(k) => k`), all test assertions must check for translation keys (e.g. `'asteroid.approachDate'`) not the actual Russian/English strings. Mock files for i18next live at:
+
 - `__mocks__/react-i18next.tsx`
 - `__mocks__/i18next-browser-languagedetector.ts`
 
