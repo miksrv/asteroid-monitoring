@@ -80,22 +80,33 @@ describe('Spacemap', () => {
         jest.clearAllMocks()
     })
 
-    it('renders the container div with id "my-container"', () => {
+    it('renders the container div', () => {
         const { container } = render(<Spacemap />)
-        const div = container.querySelector('#my-container')
-        expect(div).toBeInTheDocument()
+        expect(container.firstChild).toBeInTheDocument()
     })
 
     it('renders container with 100% width style', () => {
         const { container } = render(<Spacemap />)
-        const div = container.querySelector('#my-container') as HTMLElement
+        const div = container.firstChild as HTMLElement
         expect(div.style.width).toBe('100%')
     })
 
     it('renders container with 100% height style', () => {
         const { container } = render(<Spacemap />)
-        const div = container.querySelector('#my-container') as HTMLElement
+        const div = container.firstChild as HTMLElement
         expect(div.style.height).toBe('100%')
+    })
+
+    it('clears container innerHTML on unmount', () => {
+        const { container, unmount } = render(
+            <Spacemap
+                asteroidName='2011 AG5'
+                orbitalData={mockOrbitalData}
+            />
+        )
+        const div = container.firstChild as HTMLElement
+        unmount()
+        expect(div.innerHTML).toBe('')
     })
 
     it('does not initialize Simulation when orbitalData is not provided', () => {
