@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 import duration, { Duration } from 'dayjs/plugin/duration'
 import { cn } from 'simple-react-ui-kit'
@@ -15,6 +16,7 @@ interface CountdownProps {
 }
 
 export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) => {
+    const { t } = useTranslation()
     const [durationTime, setDurationTime] = useState<Duration>(dayjs.duration(0))
     const [sign, setSign] = useState<TimeSign>('-')
 
@@ -25,9 +27,9 @@ export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) =>
             const isPast = difference < 0
             const absDifference = Math.abs(difference)
 
-            const duration = dayjs.duration(absDifference, 'seconds')
+            const dur = dayjs.duration(absDifference, 'seconds')
 
-            setDurationTime(duration)
+            setDurationTime(dur)
             setSign(isPast ? '+' : '-')
         }
 
@@ -42,7 +44,7 @@ export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) =>
 
     return (
         <div className={cn(styles.countdown, sign === '+' && styles.countdownPast, hazardous && styles.hazardous)}>
-            <span className={styles.title}>{'Обратный отсчет'}</span>
+            <span className={styles.title}>{t('countdown.title')}</span>
             <div className={styles.digitsContainer}>
                 <h5 className={styles.tText}>
                     {'T'}
@@ -50,22 +52,22 @@ export const Countdown: React.FC<CountdownProps> = ({ timestamp, hazardous }) =>
                 </h5>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{Math.floor(durationTime.asDays()).toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'Дней'}</span>
+                    <span className={styles.unit}>{t('countdown.days')}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.hours().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'Часов'}</span>
+                    <span className={styles.unit}>{t('countdown.hours')}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.minutes().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'Минут'}</span>
+                    <span className={styles.unit}>{t('countdown.minutes')}</span>
                 </div>
                 <h4 className={styles.divider}>:</h4>
                 <div className={styles.digitBlock}>
                     <h3 className={styles.digit}>{durationTime.seconds().toString().padStart(2, '0')}</h3>
-                    <span className={styles.unit}>{'Секунд'}</span>
+                    <span className={styles.unit}>{t('countdown.seconds')}</span>
                 </div>
             </div>
         </div>

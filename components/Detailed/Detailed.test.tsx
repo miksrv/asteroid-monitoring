@@ -1,7 +1,9 @@
 import React from 'react'
+
 import { render, screen } from '@testing-library/react'
 
 import { AsteroidData } from '@/api/types'
+import { Detailed } from '@/components/Detailed/Detailed'
 
 const mockGetAsteroidData = jest.fn()
 
@@ -22,8 +24,6 @@ jest.mock('@/components/Spacemap', () => ({
     __esModule: true,
     default: ({ asteroidName }: { asteroidName?: string }) => <div data-testid='spacemap-mock'>{asteroidName}</div>
 }))
-
-import { Detailed } from '@/components/Detailed/Detailed'
 
 const mockOrbitalData = {
     orbit_id: '1',

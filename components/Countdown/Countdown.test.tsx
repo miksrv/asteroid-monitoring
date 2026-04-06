@@ -1,5 +1,6 @@
 import React from 'react'
-import { render, screen, act } from '@testing-library/react'
+
+import { act, render, screen } from '@testing-library/react'
 
 import { Countdown } from '@/components/Countdown/Countdown'
 
@@ -14,15 +15,15 @@ describe('Countdown', () => {
 
     it('renders the countdown title', () => {
         render(<Countdown />)
-        expect(screen.getByText('Обратный отсчет')).toBeInTheDocument()
+        expect(screen.getByText('countdown.title')).toBeInTheDocument()
     })
 
     it('renders all time unit labels', () => {
         render(<Countdown />)
-        expect(screen.getByText('Дней')).toBeInTheDocument()
-        expect(screen.getByText('Часов')).toBeInTheDocument()
-        expect(screen.getByText('Минут')).toBeInTheDocument()
-        expect(screen.getByText('Секунд')).toBeInTheDocument()
+        expect(screen.getByText('countdown.days')).toBeInTheDocument()
+        expect(screen.getByText('countdown.hours')).toBeInTheDocument()
+        expect(screen.getByText('countdown.minutes')).toBeInTheDocument()
+        expect(screen.getByText('countdown.seconds')).toBeInTheDocument()
     })
 
     it('shows T- sign when timestamp is in the future', () => {
@@ -58,7 +59,7 @@ describe('Countdown', () => {
             jest.advanceTimersByTime(1000)
         })
 
-        expect(screen.getByText('Секунд')).toBeInTheDocument()
+        expect(screen.getByText('countdown.seconds')).toBeInTheDocument()
     })
 
     it('clears interval on unmount', () => {
@@ -87,7 +88,7 @@ describe('Countdown', () => {
         const timestamp = Date.now() + (1 * 24 + 2) * 3600 * 1000
         render(<Countdown timestamp={timestamp} />)
         // Day digit should be at least 2 chars (padded)
-        const dayDigit = screen.getByText('Дней').closest('div')
+        const dayDigit = screen.getByText('countdown.days').closest('div')
         expect(dayDigit?.querySelector('h3')?.textContent?.length).toBeGreaterThanOrEqual(2)
     })
 })

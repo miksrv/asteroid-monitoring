@@ -1,7 +1,10 @@
 import React from 'react'
+import * as Spacekit from 'spacekit.js'
+
 import { render } from '@testing-library/react'
 
 import { OrbitalData } from '@/api/types'
+import { Spacemap } from '@/components/Spacemap/Spacemap'
 
 // spacekit.js uses WebGL and Three.js — mock it entirely
 jest.mock('spacekit.js', () => {
@@ -41,9 +44,6 @@ jest.mock('spacekit.js', () => {
         }
     }
 })
-
-import { Spacemap } from '@/components/Spacemap/Spacemap'
-import * as Spacekit from 'spacekit.js'
 
 const mockOrbitalData: OrbitalData = {
     orbit_id: '1',

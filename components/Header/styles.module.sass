@@ -11,6 +11,7 @@
     gap: 0.6rem
     font-size: 2rem
     letter-spacing: 1px
+    position: relative
 
     @media only screen and (max-width: 768px)
         padding: .5rem
@@ -30,6 +31,13 @@
         height: auto
         animation: shake 0.3s infinite
         margin-right: 1rem
+
+    .languageSwitcherWrapper
+        position: absolute
+        right: 1rem
+
+        @media only screen and (max-width: 768px)
+            right: 0.5rem
 
     @keyframes shake
         0%

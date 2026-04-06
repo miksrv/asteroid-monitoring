@@ -1,5 +1,6 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import { AsteroidListData } from '@/api/types'
 import { Asteroid } from '@/components/Asteroid/Asteroid'
@@ -62,24 +63,24 @@ describe('Asteroid', () => {
         expect(screen.getByText('2011 AG5')).toBeInTheDocument()
     })
 
-    it('renders label "Расстояние"', () => {
+    it('renders label "asteroid.distance"', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('Расстояние')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.distance')).toBeInTheDocument()
     })
 
-    it('renders label "Дата сближения"', () => {
+    it('renders label "asteroid.approachDate"', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('Дата сближения')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.approachDate')).toBeInTheDocument()
     })
 
-    it('renders label "Скорость"', () => {
+    it('renders label "asteroid.speed"', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('Скорость')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.speed')).toBeInTheDocument()
     })
 
-    it('renders label "Зв. величина"', () => {
+    it('renders label "asteroid.magnitude"', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('Зв. величина')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.magnitude')).toBeInTheDocument()
     })
 
     it('renders speed in km/s rounded', () => {
@@ -87,29 +88,29 @@ describe('Asteroid', () => {
         expect(screen.getByText('13')).toBeInTheDocument() // Math.round(12.5) = 13
     })
 
-    it('renders "Безопасен" for non-hazardous asteroid', () => {
+    it('renders "asteroid.safe" for non-hazardous asteroid', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('Безопасен')).toBeInTheDocument()
-        expect(screen.queryByText('Опасный')).toBeNull()
+        expect(screen.getByText('asteroid.safe')).toBeInTheDocument()
+        expect(screen.queryByText('asteroid.dangerous')).toBeNull()
     })
 
-    it('renders "Опасный" for hazardous asteroid', () => {
+    it('renders "asteroid.dangerous" for hazardous asteroid', () => {
         render(<Asteroid data={hazardousAsteroid} />)
-        expect(screen.getByText('Опасный')).toBeInTheDocument()
-        expect(screen.queryByText('Безопасен')).toBeNull()
+        expect(screen.getByText('asteroid.dangerous')).toBeInTheDocument()
+        expect(screen.queryByText('asteroid.safe')).toBeNull()
     })
 
     it('renders estimated diameter in meters', () => {
         render(<Asteroid data={mockAsteroid} />)
         // Average of 100 and 300 = 200 meters
         expect(screen.getByText('200')).toBeInTheDocument()
-        expect(screen.getByText('м')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.meters')).toBeInTheDocument()
     })
 
     it('renders formatted miss distance in km', () => {
         render(<Asteroid data={mockAsteroid} />)
         expect(screen.getByText('29,920,000')).toBeInTheDocument()
-        expect(screen.getByText('км')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.km')).toBeInTheDocument()
     })
 
     it('renders Countdown component', () => {
@@ -117,12 +118,12 @@ describe('Asteroid', () => {
         expect(screen.getByTestId('countdown-mock')).toBeInTheDocument()
     })
 
-    it('renders the "Подробнее" button', () => {
+    it('renders the "asteroid.details" button', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByRole('button', { name: 'Подробнее' })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: 'asteroid.details' })).toBeInTheDocument()
     })
 
-    it('calls onClick with asteroid id when "Подробнее" button is clicked', () => {
+    it('calls onClick with asteroid id when details button is clicked', () => {
         const handleClick = jest.fn()
         render(
             <Asteroid
@@ -130,14 +131,14 @@ describe('Asteroid', () => {
                 onClick={handleClick}
             />
         )
-        fireEvent.click(screen.getByRole('button', { name: 'Подробнее' }))
+        fireEvent.click(screen.getByRole('button', { name: 'asteroid.details' }))
         expect(handleClick).toHaveBeenCalledWith(3542519)
     })
 
     it('does not throw when onClick is not provided', () => {
         render(<Asteroid data={mockAsteroid} />)
         expect(() => {
-            fireEvent.click(screen.getByRole('button', { name: 'Подробнее' }))
+            fireEvent.click(screen.getByRole('button', { name: 'asteroid.details' }))
         }).not.toThrow()
     })
 
@@ -152,7 +153,7 @@ describe('Asteroid', () => {
 
     it('renders estimated label', () => {
         render(<Asteroid data={mockAsteroid} />)
-        expect(screen.getByText('[примерно]')).toBeInTheDocument()
+        expect(screen.getByText('asteroid.estimated')).toBeInTheDocument()
     })
 
     it('renders correctly when close_approach_data is empty', () => {

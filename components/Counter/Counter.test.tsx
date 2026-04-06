@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { render, screen } from '@testing-library/react'
 
 import { Counter } from '@/components/Counter/Counter'
@@ -22,13 +23,13 @@ describe('Counter', () => {
     it('renders total count when total is provided', () => {
         render(<Counter total={42} />)
         expect(screen.getByText('42')).toBeInTheDocument()
-        expect(screen.getByText(/Найдено астероидов/)).toBeInTheDocument()
+        expect(screen.getByText(/counter.found/)).toBeInTheDocument()
     })
 
     it('renders dangerous count when dangerous is provided', () => {
         render(<Counter dangerous={5} />)
         expect(screen.getByText('5')).toBeInTheDocument()
-        expect(screen.getByText(/Потенциально опасных/)).toBeInTheDocument()
+        expect(screen.getByText(/counter.dangerous/)).toBeInTheDocument()
     })
 
     it('renders both total and dangerous when both are provided', () => {
@@ -39,9 +40,9 @@ describe('Counter', () => {
             />
         )
         expect(screen.getByText('20')).toBeInTheDocument()
-        expect(screen.getByText(/Найдено астероидов/)).toBeInTheDocument()
+        expect(screen.getByText(/counter.found/)).toBeInTheDocument()
         expect(screen.getByText('3')).toBeInTheDocument()
-        expect(screen.getByText(/Потенциально опасных/)).toBeInTheDocument()
+        expect(screen.getByText(/counter.dangerous/)).toBeInTheDocument()
     })
 
     it('does not render dangerous section when dangerous is 0', () => {
@@ -51,7 +52,7 @@ describe('Counter', () => {
                 dangerous={0}
             />
         )
-        expect(screen.queryByText(/Потенциально опасных/)).toBeNull()
+        expect(screen.queryByText(/counter.dangerous/)).toBeNull()
     })
 
     it('does not render total section when total is 0', () => {
@@ -61,6 +62,6 @@ describe('Counter', () => {
                 dangerous={2}
             />
         )
-        expect(screen.queryByText(/Найдено астероидов/)).toBeNull()
+        expect(screen.queryByText(/counter.found/)).toBeNull()
     })
 })
