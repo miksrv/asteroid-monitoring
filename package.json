@@ -58,7 +58,7 @@
         "typescript": "5.9.3"
     },
     "devDependencies": {
-        "@eslint/compat": "^2.0.5",
+        "@eslint/compat": "^2.1.0",
         "@next/eslint-plugin-next": "^16.2.3",
         "@testing-library/dom": "^10.4.1",
         "@testing-library/jest-dom": "^6.9.1",
