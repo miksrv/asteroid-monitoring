@@ -39,7 +39,7 @@
         "prettier:fix": "prettier --write ."
     },
     "dependencies": {
-        "@reduxjs/toolkit": "^2.11.2",
+        "@reduxjs/toolkit": "^2.12.0",
         "asteroid-loading-spinner": "^2.0.2",
         "dayjs": "^1.11.20",
         "i18next": "^25.10.10",
