@@ -1905,12 +1905,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:16.2.3, @next/eslint-plugin-next@npm:^16.2.3":
+"@next/eslint-plugin-next@npm:16.2.3":
   version: 16.2.3
   resolution: "@next/eslint-plugin-next@npm:16.2.3"
   dependencies:
     fast-glob: "npm:3.3.1"
   checksum: 10c0/be881aa89e0840ab60455b07a2bb9ec0d686c664a0d91e8ca815797a65ca71d7bd79d186b0df5b6892c2bf57bd07fa05421cd93e2812dfeaedfad5ed9fd1023e
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:^16.2.9":
+  version: 16.2.9
+  resolution: "@next/eslint-plugin-next@npm:16.2.9"
+  dependencies:
+    fast-glob: "npm:3.3.1"
+  checksum: 10c0/74501333ce844ec02f2518c98859a42d3db1bcae3e7365a2c0f6691d38621719783d285572a23ca1c3edd2801f9805c073d6e572990e70a11f2e894361774f69
   languageName: node
   linkType: hard
 
@@ -3619,7 +3628,7 @@ __metadata:
   resolution: "asteroid-monitoring@workspace:."
   dependencies:
     "@eslint/compat": "npm:^2.1.0"
-    "@next/eslint-plugin-next": "npm:^16.2.3"
+    "@next/eslint-plugin-next": "npm:^16.2.9"
     "@reduxjs/toolkit": "npm:^2.11.2"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
