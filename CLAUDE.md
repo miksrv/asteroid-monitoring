@@ -43,6 +43,10 @@ Requires `NEXT_PUBLIC_API_KEY` in `.env` — a NASA NeoWS API key.
 
 **3D visualization:** `components/Spacemap/` uses `spacekit.js` with a real asteroid OBJ model (`public/A1046.M1863.obj`).
 
+## Versioning
+
+Whenever a change is made to this project, bump the version in `package.json` (major, minor or patch, whichever fits the change) and add an entry to `CHANGELOG.md` following its existing format (a `## <version>` heading with a `### Major Changes` / `### Minor Changes` / `### Patch Changes` subsection listing the changes as bullet points).
+
 ## Code Style
 
 - 4-space indentation, single quotes, no semicolons, 120-char line width (see `.prettierrc`)

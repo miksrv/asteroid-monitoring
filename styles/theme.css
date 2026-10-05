@@ -1,92 +1,36 @@
+/*
+ * Project design tokens.
+ *
+ * `simple-react-ui-kit/theme.css` is imported first (see pages/_app.tsx) and
+ * defines every token the kit components use, including a dark theme that is
+ * switched on via `data-theme="dark"` (set statically on <html> in
+ * pages/_document.tsx — this app has no light theme). This file keeps only
+ * what differs from the kit defaults, for the few kit components this app
+ * actually renders (Button in `secondary` mode, Skeleton, Dialog) plus the
+ * status colours used directly by the app's own styles. Do not duplicate kit
+ * defaults here.
+ */
 :root {
-    /* Element Heights for `size` props */
+    /* Compact control heights (smaller than the kit's own defaults) */
     --size-small: 24px;
     --size-medium: 28px;
     --size-large: 32px;
 
-    /* Primary Colors */
-    --color-contrast: #ffffff;
-
+    /* Status colours used directly by Asteroid/Countdown/Counter/Footer styles */
     --color-green: #47da84;
-    /*--color-green-hover: #48ac4a;*/
-    /*--color-green-active: #45a64a;*/
-    /*--color-green-background: #e5ffe5;*/
-
     --color-orange: #f8a01c;
     --color-orange-hover: #ee9a1d;
-    --color-orange-active: #e4941f;
-    --color-orange-background: #5e5443;
-
     --color-red: #fb5252;
-    /*--color-red-hover: #dd4446;*/
-    /*--color-red-active: #d44245;*/
-    /*--color-red-background: #ffdddd;*/
 
-    /*--color-main: #2688eb;*/
-    /*--color-main-hover: #4c96ea;*/
-    /*--color-main-active: #237edd;*/
-    /*--color-main-background: #3c4957;*/
-
-    /* Text and Typography */
-    --font-size: 14px;
-    --font-size-small: 12px;
-    --font-family:
-        -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue', 'Open Sans (Custom)',
-        system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    --text-color-primary: #d2e1e8;
-    --text-color-secondary: #83959b;
-    --text-color-secondary-hover: #939ca9;
-
-    /* Layout and Containers */
-    --border-radius: 6px;
+    /* Layout */
     --body-background: #1b1b1b;
     --modal-background: #2c2d2e;
-    --overlay-background: rgba(0, 0, 0, 0.6);
-    --container-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
-    --container-background-color: #ffffff;
-    --container-error-background-color: #ffe9e9;
-    --container-error-color: var(--color-red);
-    --container-success-background-color: #e8f9e8;
-    --container-success-color: var(--color-green);
+    --text-color-primary: #d2e1e8;
+    --text-color-secondary: #83959b;
 
-    /* Input Fields and Dropdowns */
-    --dropdown-background-color: #232324;
-    --dropdown-background-color-hover: #3a3a3b;
-    --dropdown-badge-background-color: #505050;
-    --input-background-color: #232324;
-    --input-label-color: #969a9f;
-    --input-border: 0.5px solid var(--input-border-color);
-    --input-border-color: #444546;
-    --input-border-focus-color: var(--color-orange);
-
-    /* Buttons */
+    /* Button: this app only renders `mode="secondary"`, with a lighter
+       font weight matching the app's own typography */
     --button-font-weight: 300;
-    --button-default-color: var(--text-color-primary);
-    --button-default-background: transparent;
-    --button-default-background-hover: rgba(255, 255, 255, 0.04);
-    --button-default-background-active: rgba(255, 255, 255, 0.08);
-
-    --button-primary-color: var(--body-background);
-    --button-primary-background: var(--text-color-primary);
-    --button-primary-background-hover: #ebedf0;
-    --button-primary-background-active: #d7d8db;
-
     --button-secondary-background: rgba(255, 255, 255, 0.1);
     --button-secondary-background-hover: rgba(255, 255, 255, 0.12);
-    --button-secondary-background-active: rgba(255, 255, 255, 0.14);
-    --button-secondary-color: var(--text-color-primary);
-    --button-secondary-color-hover: var(--text-color-primary);
-    --button-secondary-color-active: var(--text-color-primary);
-
-    /* Popout */
-    /*--popout-shadow: 0 0 2px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.08);*/
-
-    /* Table */
-    /*--table-header-background: #232324;*/
-    /*--table-header-background-hover: #2f2f31;*/
-    /*--table-border-color: var(--input-border-color);*/
-    /*--table-row-box-shadow: inset 0 -1px var(--input-border-color);*/
-
-    /* Skeleton */
-    /*--skeleton-background-animation: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);*/
 }

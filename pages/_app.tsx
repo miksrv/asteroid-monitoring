@@ -9,6 +9,8 @@ import { wrapper } from '@/api/store'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import i18n from '@/i18n/config'
 
+// Kit tokens first, project overrides (styles/globals.sass pulls in styles/theme.css) after
+import 'simple-react-ui-kit/theme.css'
 import '../styles/globals.sass'
 
 const App = ({ Component, pageProps }: AppProps) => {
