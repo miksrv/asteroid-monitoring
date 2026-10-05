@@ -47,6 +47,8 @@ Requires `NEXT_PUBLIC_API_KEY` in `.env` — a NASA NeoWS API key.
 
 Whenever a change is made to this project, bump the version in `package.json` (major, minor or patch, whichever fits the change) and add an entry to `CHANGELOG.md` following its existing format (a `## <version>` heading with a `### Major Changes` / `### Minor Changes` / `### Patch Changes` subsection listing the changes as bullet points).
 
+**Releasing:** after a version-bump PR is merged into `main`, tag that commit `v<version>` (matching `package.json`), push the tag, then create a GitHub release from it whose notes are the matching `CHANGELOG.md` section.
+
 ## Code Style
 
 - 4-space indentation, single quotes, no semicolons, 120-char line width (see `.prettierrc`)
