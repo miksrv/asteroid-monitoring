@@ -4,7 +4,8 @@ import AsteroidLoadingSpinner from 'asteroid-loading-spinner'
 import { Dialog } from 'simple-react-ui-kit'
 
 import { NextPage } from 'next'
-import { NextSeo } from 'next-seo'
+import Head from 'next/head'
+import { generateNextSeo } from 'next-seo/pages'
 
 import API from '@/api/api'
 import { ApiNasaResponse } from '@/api/types'
@@ -71,22 +72,24 @@ const HomePage: NextPage = () => {
 
     return (
         <>
-            <NextSeo
-                title={t('index.seoTitle')}
-                description={t('index.seoDescription')}
-                canonical={'https://asteroid.miksoft.pro'}
-                openGraph={{
-                    images: [
-                        {
-                            height: 1536,
-                            url: '/images/demo.jpg',
-                            width: 2146
-                        }
-                    ],
-                    locale: i18n.language,
-                    url: 'https://asteroid.miksoft.pro'
-                }}
-            />
+            <Head>
+                {generateNextSeo({
+                    title: t('index.seoTitle'),
+                    description: t('index.seoDescription'),
+                    canonical: 'https://asteroid.miksoft.pro',
+                    openGraph: {
+                        images: [
+                            {
+                                height: 1536,
+                                url: '/images/demo.jpg',
+                                width: 2146
+                            }
+                        ],
+                        locale: i18n.language,
+                        url: 'https://asteroid.miksoft.pro'
+                    }
+                })}
+            </Head>
 
             <Header />
 
