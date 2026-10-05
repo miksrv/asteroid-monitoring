@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.2.0
+
+### Minor Changes
+
+- Upgraded Next.js, Redux Toolkit, i18next, next-seo, sass, and simple-react-ui-kit to their latest major versions.
+- Migrated theme styling to simple-react-ui-kit 2.0 theme tokens; dropped light theme support, dark theme only.
+- Adapted SEO head configuration to the next-seo 7 Pages Router API.
+
 ## 1.1.10
 
 ### Patch Changes
